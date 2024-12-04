@@ -1,1 +1,46 @@
-<p>register works!</p>
+<div class="container py-5 h-100"></div>
+    <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()">
+   
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" formControlName="name" required>
+        <div *ngIf="userForm.controls.name?.touched && userForm.controls.name?.invalid" class="text-danger">
+          Name is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Surname</label>
+        <input type="text" class="form-control" id="surname" name="surname" formControlName="surname" required>
+        <div *ngIf="userForm.controls.surname?.touched && userForm.controls.surname?.invalid" class="text-danger">
+          Surname is required.
+        </div>
+      </div>
+
+      <div class="form-group"></div>
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" class="form-control" id="mobile" name="mobile" formControlName="mobile" required pattern="[0-9]{10}">
+        <div *ngIf="userForm.controls.mobile?.touched && userForm.controls.mobile?.invalid" class="text-danger">
+          Please enter a valid mobile number.
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" formControlName="email" required email>
+        <div *ngIf="userForm.controls.email?.touched && userForm.controls.email?.invalid" class="text-danger">
+          Please enter a valid email address.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="age">Password</label>
+        <input type="number" class="form-control" id="password" name="password" formControlName="password" required >
+        <div *ngIf="userForm.controls.age?.touched && userForm.controls.age?.invalid" class="text-danger">
+          Password is required.
+        </div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
