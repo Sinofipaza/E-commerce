@@ -4,11 +4,11 @@ import { OrdersComponent } from './ui/orders/orders.component';
 import { ProductDetailsComponent } from './ui/product-details/product-details.component';
 import { HelpComponent } from './ui/help/help.component';
 import { AboutComponent } from './ui/about/about.component';
-import { ProductsPageComponent } from './ui/products-page/products-page.component';
 
 
 import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
+import { ProductsPageComponent } from './ui/products-page/products-page.component';
 
 
 
@@ -38,9 +38,17 @@ export const routes: Routes = [
     component: ProductDetailsComponent,
     pathMatch: 'full',
   },
-    {path: "products", component: ProductsPageComponent, pathMatch: "full"},
-    {path: "products/:id", component: ProductDetailsComponent, pathMatch: "full"}
+  { path: 'products', component: ProductsPageComponent, pathMatch: 'full' },
+  {
+    path: 'products/:id',
+    component: ProductDetailsComponent,
+    pathMatch: 'full',
+  },
+  { path: 'products', component: ProductsPageComponent, pathMatch: 'full' },
+  {
+    path: 'products/:id',
+    component: ProductDetailsComponent,
+    pathMatch: 'full',
+  },
 ];
-
-
 
