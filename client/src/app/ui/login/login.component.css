@@ -1,0 +1,40 @@
+.card {
+    background-color: #ffffff; 
+    border-radius: 1rem;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input {
+    background-color: #f9f9f9; 
+    border: 1px solid #ccc; 
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #007bff;
+    border-color: #007bff;
+  }
+  
+  button {
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #343a40;
+    border: none;
+    color: #ffffff; 
+    border-radius: 0.25rem;
+  }
+  
+  button:hover {
+    background-color: #495057;
+    color: #ffffff;
+  }
+  
+  .text-danger {
+    font-size: 0.9rem;
+  }
+  
