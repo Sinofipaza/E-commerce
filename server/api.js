@@ -115,7 +115,6 @@ app.get("/products", async (req, res) => {
     const results = await pool.query(
       "SELECT id, name, price, short_description, thumbnail_url FROM products;"
     );
-    
     res.json(results.rows);
   } catch (error) {
     console.log(error);
