@@ -7,12 +7,12 @@ import { ProductsInterface } from '../types/products.interface';
   providedIn: 'root',
 })
 export class ProductsService {
-  url = 'http://localhost:3000/'
+  url = 'http://localhost:3000'
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<ProductsInterface> {
-    return this.http.get<ProductsInterface>(`${this.url}/products`);
+  getProducts(): Observable<ProductsInterface[]> {
+    return this.http.get<ProductsInterface[]>(`${this.url}/products`);
   }
 
   getProductById(id: number): Observable<ProductsInterface> {
