@@ -1,38 +1,42 @@
-<div class="container py-5 h-100 d-flex justify-content-center align-items-center">
+<div class="container py-5 mt-5 h-100 d-flex justify-content-center align-items-center">
     <div class="card shadow p-4" style="max-width: 400px; border-radius: 1rem;">
-      <div class="card-body">
+      <div class="card-body mb-5">
         <h3 class="text-center mb-4">Login</h3>
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="loginForm" (ngSubmit)=" onSubmit()">
           
-          <div class="form-group mb-3">
+          <!-- Email Field -->
+          <div class="mb-3">
             <label for="email">Email</label>
             <input 
               type="email" 
               class="form-control" 
               id="email" 
-              name="email" 
               formControlName="email" 
               required>
-            <div *ngIf="loginForm.controls.email?.touched && loginForm.controls.email?.invalid" class="text-danger mt-1">
+            <div *ngIf="loginForm.controls['email']?.touched && loginForm.controls['email']?.invalid" class="text-danger mt-1">
               Please enter a valid email address.
             </div>
           </div>
+
+           <!-- Password Field -->
   
-          <div class="form-group mb-4">
+          <div class=" mb-4">
             <label for="password">Password</label>
             <input 
               type="password" 
               class="form-control" 
               id="password" 
-              name="password" 
               formControlName="password" 
               required>
-            <div *ngIf="loginForm.controls.password?.touched && loginForm.controls.password?.invalid" class="text-danger mt-1">
+            <div *ngIf="loginForm.controls['password']?.touched && loginForm.controls['password']?.invalid" class="text-danger mt-1">
               Password is required.
             </div>
           </div>
-  
-          <button type="submit" class="btn btn-dark w-100">Submit</button>
+
+          <!-- Login Button -->
+          <button type="submit" class="btn btn-dark w-100">Login</button>
+          <p class="mt-2">Don't have an account? <a routerLink="/register" class="register-here fw-bold">Register Here!</a></p>
+
         </form>
       </div>
     </div>
