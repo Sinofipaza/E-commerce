@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { CartComponent } from './ui/cart/cart.component';
 import { OrdersComponent } from './ui/orders/orders.component';
 import { ProductDetailsComponent } from './ui/product-details/product-details.component';
+import { HelpComponent } from './ui/help/help.component';
+import { AboutComponent } from './ui/about/about.component';
 
 export const routes: Routes = [
     {path:"orders",component:OrdersComponent},
@@ -17,5 +19,8 @@ export const routes: Routes = [
         children: [
             {path:"cart",component:CartComponent}
         ]
-    }
+    },
+    { path: 'help', component: HelpComponent },
+  { path: 'about', component: AboutComponent },
 ];
+
