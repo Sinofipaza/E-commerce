@@ -23,15 +23,16 @@
   button {
     font-size: 1.1rem;
     font-weight: bold;
-    background-color: #343a40;
+    background-color: #000000;
     border: none;
     color: #ffffff; 
     border-radius: 0.25rem;
   }
   
   button:hover {
-    background-color: #495057;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: black;
+    border: 2px solid black;
   }
   
   .text-danger {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 function emailValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -16,7 +17,7 @@ function emailValidator(): ValidatorFn {
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -38,9 +39,9 @@ export class LoginComponent {
 
   onSubmit() : void {
     if (this.loginForm.valid) {
-      console.log('Form submitted successfully', this.loginForm.value);
+    alert('Form submitted successfully');
     } else {
-      console.log('Form is invalid', this.loginForm.errors);
+      alert('Form is invalid');
     }
   }
 }
