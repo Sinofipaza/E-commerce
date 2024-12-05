@@ -6,6 +6,8 @@ import { HelpComponent } from './ui/help/help.component';
 import { AboutComponent } from './ui/about/about.component';
 
 
+import { LoginComponent } from './ui/login/login.component';
+import { RegisterComponent } from './ui/register/register.component';
 
 export const routes: Routes = [
     {path:"orders",component:OrdersComponent},
@@ -24,5 +26,11 @@ export const routes: Routes = [
     },
     { path: 'help', component: HelpComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'about', component: AboutComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent  },
+  { path: 'register', component: RegisterComponent },
 ];
+
+
 

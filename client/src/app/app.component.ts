@@ -5,11 +5,12 @@ import { NavComponent } from './ui/nav/nav.component';
 import {  ReactiveFormsModule} from '@angular/forms';
 import { CartComponent } from './ui/cart/cart.component';
 import { LoginComponent } from './ui/login/login.component';
+import { RegisterComponent } from './ui/register/register.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, NavComponent, RouterLink, ReactiveFormsModule, ReactiveFormsModule,CartComponent, LoginComponent],
+  imports: [RouterOutlet, FooterComponent, NavComponent, RouterLink, ReactiveFormsModule, ReactiveFormsModule,CartComponent, LoginComponent, RegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
