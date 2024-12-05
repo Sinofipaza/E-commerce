@@ -4,17 +4,17 @@ import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractC
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 
-function emailValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const email = control.value;
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+// function emailValidator(): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     const email = control.value;
+//     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    if (email && !emailPattern.test(email)) {
-      return { invalidEmail: true }; 
-    }
-    return null; 
-  };
-}
+//     if (email && !emailPattern.test(email)) {
+//       return { invalidEmail: true }; 
+//     }
+//     return null; 
+//   };
+// }
 
 @Component({
   selector: 'app-login',
