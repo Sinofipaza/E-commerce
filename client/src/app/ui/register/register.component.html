@@ -34,7 +34,7 @@
         <div class="mb-3">
           <label for="phone">Phone Number</label>
           <input 
-            type="phone" 
+            type="text" 
             class="form-control" 
             id="phone" 
             formControlName="phone" 
@@ -72,7 +72,7 @@
             formControlName="password" 
             required>
           <div *ngIf="registerForm.controls['password']?.touched && registerForm.controls['password']?.invalid" class="text-danger mt-1">
-            Password is required.
+            Password must be at least 6 characters.
           </div>
         </div>
 
