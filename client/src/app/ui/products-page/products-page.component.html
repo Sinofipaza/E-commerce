@@ -1,17 +1,26 @@
-@for (product of products; track product.id) {
-  <div class="card">
-    <img
-      [src]="product.thumbnail_url"
-      class="card-img-top"
-      [alt]="product.name"
-    />
-    <div class="card-body">
-      <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text">{{ product.short_description }}</p>
-      <p class="card-price">R{{ product.price }}</p>
+<div class="card-container">
+  @for (product of products; track product.id) {
+    <div class="card">
+      <img
+        [src]="product.thumbnail_url"
+        class="card-img-top"
+        [alt]="product.name"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <p class="card-text">{{ product.short_description }}</p>
+        <p class="card-price">R{{ product.price }}</p>
+      </div>
+      <div class="card-footer">
+        <button
+          type="button"
+          class="btn btn-dark"
+          (click)="showProductDetailsPage(product.id)"
+        >
+          Select
+        </button>
+      </div>
     </div>
-    <div class="card-footer">
-      <button type="button" class="btn btn-dark" (click)="showProductDetailsPage(product.id)">Dark</button>
-    </div>
-  </div>
-}
+  }
+</div>
+
