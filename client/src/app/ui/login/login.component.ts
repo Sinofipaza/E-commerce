@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+<<<<<<< HEAD
 import { LoginService } from '../../services/login.service';
+=======
+>>>>>>> 430121b (rebasing)
 
 // function emailValidator(): ValidatorFn {
 //   return (control: AbstractControl): ValidationErrors | null => {

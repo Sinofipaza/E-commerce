@@ -21,7 +21,12 @@ export class RegisterComponent {
       surname: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       email: ['', [Validators.required, Validators.email]],
+<<<<<<< HEAD
       password: ['', [Validators.required, Validators.minLength(6)]],
+=======
+      password: ['', [Validators.required, Validators.minLength(6),Validators.pattern('^([A-Z])([a-z])([0-9]).+$') // At least 1 uppercase, 1 lowercase, 1 digit
+]],
+>>>>>>> 430121b (rebasing)
     });
   };
 
