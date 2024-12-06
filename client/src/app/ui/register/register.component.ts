@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public loginService: LoginService) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
@@ -27,6 +28,7 @@ export class RegisterComponent {
   onSubmit(): void {
     if (this.registerForm.valid) {
       console.log('Registration data:', this.registerForm.value);
+      this.loginService.register(this.registerForm.value.name, this.registerForm.value.surname, this.registerForm.value.phone, this.registerForm.value.email, this.registerForm.value.password).subscribe((response) => {})
       alert('Registration successful!');
     } else {
       alert('Form is invalid. Please check your inputs.');
