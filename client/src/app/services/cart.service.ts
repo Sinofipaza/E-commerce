@@ -28,9 +28,14 @@ export class CartService {
     return this.http.get<CartItems[]>(this.apiUrl + 'cartItems');
   }
 
-  getAllOrderedProducts(email: string): Observable<CartItems[]> {
-    const emailObj = { email: email };
-    return this.http.post<CartItems[]>(this.apiUrl + 'ordered', emailObj);
+  // getAllOrderedProducts(email: string): Observable<CartItems[]> {
+  //   const emailObj = { email: email };
+  //   return this.http.post<CartItems[]>(this.apiUrl + 'ordered', emailObj);
+  // }
+
+  getAllOrderedProducts(): Observable<CartItems[]> {
+    // const emailObj = { email: email };
+    return this.http.get<CartItems[]>(this.apiUrl + 'ordered');
   }
 
   updateProduct(product: CartItems) {

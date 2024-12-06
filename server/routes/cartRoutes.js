@@ -19,11 +19,12 @@ app.get("/cartItems", async (req, res) => {
   }
 });
 
-app.post("/ordered", async (req, res) => {
+app.get("/ordered", async (req, res) => {
   try {
-    const { email } = req.body;
+    // const { email } = req.body;
     const result = await pool.query(
-      `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=true AND quantity>0 AND username=\'${email}\' ORDER BY price ASC`
+      // `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=true AND quantity>0 AND username=\'${email}\' ORDER BY price ASC`
+      `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=true AND quantity>0 ORDER BY price ASC`
     );
     res.json(result.rows);
   } catch (err) {
