@@ -3,7 +3,6 @@ import dotenv from "dotenv"; //import dotenv package to load environment variabl
 
 
 
-
 const { Pool } = pkg;
 
 dotenv.config();

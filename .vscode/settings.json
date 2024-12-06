@@ -5,7 +5,6 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
-
             "name": "nt_db",
             "database": "nt_db",
             "username": "postgres",
@@ -18,7 +17,6 @@
             "driver": "PostgreSQL",
             "name": "merchday",
             "database": "merchday",
-
             "username": "postgres",
             "password": ""
         }
