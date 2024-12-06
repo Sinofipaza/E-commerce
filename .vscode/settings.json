@@ -5,8 +5,23 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
+<<<<<<< HEAD
             "name": "products",
             "database": "productsdb",
+=======
+            "name": "nt_db",
+            "database": "nt_db",
+            "username": "postgres",
+            "password": ""
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "merchday",
+            "database": "merchday",
+>>>>>>> login/register
             "username": "postgres",
             "password": ""
         }

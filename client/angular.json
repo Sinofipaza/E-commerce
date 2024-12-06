@@ -24,6 +24,7 @@
                 "input": "public"
               }
             ],
+<<<<<<< HEAD
             "styles": [
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -31,6 +32,12 @@
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
+=======
+            "styles": ["src/styles.css",
+            "node_modules/bootstrap/dist/css/bootstrap.css"],
+
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.js"]
+>>>>>>> login/register
           },
           "configurations": {
             "production": {
