@@ -1,1 +1,182 @@
-<p>cart works!</p>
+<div class="container mt-5 p-3 rounded cart">
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <div class="product-details">
+        <div class="d-flex flex-row align-items-center">
+          <i class="fa fa-long-arrow-left"></i
+          ><span class="shop ml-2"><a class="inAnchor" routerLink="/products" >Continue Shopping</a></span>
+        </div>
+        <hr/>
+        <h6 class="mb-0">Shopping cart</h6>
+        <div class="d-flex justify-content-between">
+          <span>You have {{ getCartQuantity() }} items in your cart</span>
+          <div class="d-flex flex-row align-items-center"></div>
+        </div>
+        @for(item of cartService.CartItemsArray(); track $index){
+        <div
+          class="d-flex justify-content-between align-items-center mt-3  items rounded"
+        >
+          <div class="d-flex flex-row">
+            <img class="rounded" [src]="item.imageurl" width="40vw" height="40vw" />
+            <div class="ml-2">
+              <span class="font-weight-bold d-block">{{ item.name }}</span>
+            </div>
+          </div>
+          <div class="d-flex flex-row align-items-center">
+            <span class="btn-qty"
+              ><button (click)="increaseQuantity(item)" class="minus">+</button
+              ><span class="d-block">{{ item.quantity }}</span
+              ><button (click)="decreaseQuantity(item)" class="minus">
+                -
+              </button></span
+            ><span class="d-block w-0vw font-weight-bold"
+              >R{{ getTotalPerItemCount(item) }}</span
+            ><i class="fa fa-trash-o ml-3 text-black-50"></i>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="payment-info">
+        <div class="d-flex justify-content-between align-items-center">
+          <span>Card details</span><img class="rounded" src="" width="30vw" />
+        </div>
+        <span class="type d-block mt-3 mb-1">Card type</span
+        ><label class="radio">
+          <input type="radio" name="card" value="payment" checked />
+          <span
+            ><img
+              width="30vw"
+              src="https://img.icons8.com/color/48/000000/mastercard.png"
+          /></span>
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="card" value="payment" />
+          <span
+            ><img
+              width="30vw"
+              src="https://img.icons8.com/officel/48/000000/visa.png"
+          /></span>
+        </label>
+        <form [formGroup]="cartForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name" class="credit-card-label">Name on card</label
+          ><input
+          id="name"
+          formControlName="name"
+            type="text"
+            class="form-control credit-inputs"
+            placeholder="Name"
+          />
+        </div>
+
+        <div style="color: red;">
+          <div >
+          @if(cartForm.get('name')?.errors?.['required'] && cartForm.get('name')?.touched && cartService.CartItemsArray().length>0){
+            <small>name required</small>
+          }
+        </div>
+
+        <div *ngIf="cartForm.get('name')?.touched && !validateName(cartForm.get('name')?.value) && cartService.CartItemsArray().length>0">
+        <small>Name is invalid</small>
+        </div>
+
+        <!-- <div *ngIf="cartForm.get('name')?.touched && !validateName(cartForm.get('name')?.value)">
+          <small>Name must only contain letters</small>
+        </div> -->
+      </div>
+          <label for="creditCard" class="credit-card-label">Card number</label
+          ><input
+          name="credicCard"
+            id="crediCard"
+            type="text"
+            formControlName="creditCard"
+            class="form-control credit-inputs"
+            placeholder="0000 0000 0000 0000"
+          />
+
+          <div style="color: red;">
+            @if(cartForm.get('creditCard')?.invalid && cartForm.get('creditCard')?.touched && cartService.CartItemsArray().length>0) {
+        <div *ngIf="cartForm.get('creditCard')?.touched && !validateCreditCard(cartForm.get('creditCard')?.value)">
+        <small>Card number is invalid</small>
+        </div>
+
+        <div >
+          @if(cartForm.get('creditCard')?.errors?.['required'] && cartService.CartItemsArray().length>0 ){
+            <small>Card number is required</small>
+          }
+        </div>
+          }
+          </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <label for="date" class="credit-card-label">Date</label
+            ><input
+            id="date"
+            formControlName="date"
+              type="text"
+              class="form-control credit-inputs"
+              placeholder="MM/YY"
+            />
+          </div>
+          <div style="color: red;">
+          @if(cartForm.get('date')?.errors?.['required'] && cartForm.get('date')?.touched && cartService.CartItemsArray().length>0){
+            <small>Date required</small>
+          }
+          <div *ngIf="cartForm.get('date')?.touched && !validateDate(cartForm.get('date')?.value) && cartService.CartItemsArray().length>0">
+        <small>Invalid date format. Use MM/YY</small>
+      </div>
+        </div>
+          <div class="col-md-6">
+            <label for="ccv" class="credit-card-label">CVV</label
+            ><input
+            id="ccv"
+            formControlName="cvv"
+              type="text"
+              class="form-control credit-inputs"
+              placeholder="342"
+            />
+          </div>
+          <div style="color: red;">
+          @if(cartForm.get('cvv')?.errors?.['required'] && cartForm.get('cvv')?.touched && cartService.CartItemsArray().length>0){
+            <small>CVV required</small>
+          }
+
+
+          <div *ngIf="cartForm.get('cvv')?.touched && !validateCVV(cartForm.get('cvv')?.value) && cartService.CartItemsArray().length>0">
+        <small>Invalid CVV. It should be 3 or 4 digits.</small>
+      </div>
+        </div>
+        </div>
+
+        <hr class="line" />
+        <div class="d-flex justify-content-between information">
+          <span>Subtotal</span><span>R{{ getTotalPrice() }}</span>
+        </div>
+        <div class="d-flex justify-content-between information">
+          <span>Shipping</span>
+          @if(cartService.CartItemsArray().length > 0){
+            <span>R{{getShippingCharges()}}</span>
+          }@else{
+            <span>0</span>
+          }
+
+        </div>
+        <div class="d-flex justify-content-between information">
+          <span>Total(Incl. taxes)</span
+          ><span>R{{ getTotalWithShipping() }}</span>
+        </div>
+        <button
+          class="btn btn-checkout btn-block d-flex justify-content-between mt-3"
+          type="submit"
+          [disabled]="!cartForm.valid"
+          (click)="orderFunct()">
+         <a routerLink="/orders"> </a> <i class="fa fa-long-arrow-right ml-1">Checkout</i>
+        </button>
+        </form>
+      </div>
+    </div>
+  </div>
