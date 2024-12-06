@@ -42,3 +42,5 @@ export const routes: Routes = [
     {path: "products/:id", component: ProductDetailsComponent, pathMatch: "full"}
 ];
 
+
+
