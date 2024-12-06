@@ -4,6 +4,7 @@ import { CartItems } from '../../types/cartInterface.interface';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
+import { TaxService } from '../../services/tax.service';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class CartComponent implements OnInit {
   constructor(
     public cartService: CartService,
     private fb: FormBuilder,
+    private taxService:TaxService,
     // public loginService: LoginService,
     // public productService: ProductService,
   ) {
@@ -73,9 +75,13 @@ export class CartComponent implements OnInit {
     }
     return 0;
   }
-  getTotalWithShipping() {
+
+  getTotalPriceInclTax(): number {
+    return Math.round(this.taxService.taxAmount(this.getTotalPrice(), 15))
+  }
+  getTotalWithShippingAndTax() {
     return (
-      Math.round((this.getTotalPrice() + this.getShippingCharges()) * 100) / 100
+      Math.round((this.getTotalPrice() + this.getShippingCharges() + this.getTotalPriceInclTax()) * 100) / 100
     );
   }
 
