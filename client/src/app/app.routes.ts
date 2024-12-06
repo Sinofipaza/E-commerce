@@ -3,6 +3,6 @@ import { ProductsPageComponent } from './ui/products-page/products-page.componen
 import { ProductDetailsComponent } from './ui/product-details/product-details.component';
 
 export const routes: Routes = [
-    {"path": "products", component: ProductsPageComponent, pathMatch: "full"},
-    {"path": "products/:id", component: ProductDetailsComponent, pathMatch: "full"}
+    {path: "products", component: ProductsPageComponent, pathMatch: "full"},
+    {path: "products/:id", component: ProductDetailsComponent, pathMatch: "full"}
 ];
