@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 // function emailValidator(): ValidatorFn {
 //   return (control: AbstractControl): ValidationErrors | null => {
@@ -26,7 +27,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-   constructor(private fb: FormBuilder) {
+   constructor(private fb: FormBuilder, public loginService: LoginService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -35,6 +36,7 @@ export class LoginComponent {
 
   onSubmit() : void {
     if (this.loginForm.valid) {
+      this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response) => {})
     alert('Form submitted successfully');
     } else {
       alert('Form is invalid');
