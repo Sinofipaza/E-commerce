@@ -21,11 +21,5 @@ export class ProductsService {
     return this.http.get<ProductsInterface[]>(`${this.url}/products/${id}`);
   }
 
-  updateProductOnHnd(
-    productId: number,
-    product: ProductsInterface | null,
-  ): Observable<ProductsInterface> {
-    // const emailObj = { on_hand: on_hand };
-    return this.http.put<ProductsInterface>(`${this.url}/${productId}`, product);
-  }
+
 }

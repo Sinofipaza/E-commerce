@@ -20,8 +20,8 @@ export class OrdersComponent implements OnInit {
 
 
   getOrderedItems() {
-      // this.cartService.getAllOrderedProducts(this.loginService.usernameEmail.value).subscribe((res: CartItems[]) => {
-        this.cartService.getAllOrderedProducts().subscribe((res: CartItems[]) => {
+      this.cartService.getAllOrderedProducts(this.loginService.usernameEmail.value).subscribe((res: CartItems[]) => {
+        // this.cartService.getAllOrderedProducts().subscribe((res: CartItems[]) => {
         let alreadyInOrdered : boolean = false;
         res.forEach((item: CartItems) => {
           for (let i = 0; i < this.cartService.OrderedItems().length; i++) {

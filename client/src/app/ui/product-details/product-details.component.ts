@@ -64,7 +64,7 @@ export class ProductDetailsComponent {
 
       // console.log(this.product.on_hand);
 
-      const { id, name, short_description, price, thumbnail_url } =
+      const { id, name, short_description, price, thumbnail_url} =
         this.product;
       let cartItem: CartItems = {
         id,
@@ -79,10 +79,7 @@ export class ProductDetailsComponent {
       };
       this.route.params.subscribe((params) => {
         const productId = Number(params['id']);
-        // console.log("productId: " + productId);
-        this.productsService
-          .updateProductOnHnd(productId, this.product)
-          .subscribe((response) => {});
+
       });
 
       this.cartService.saveCartProduct(cartItem).subscribe((data) => {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { CartItems } from '../types/cartInterface.interface';
 import { Observable, Subscription } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,28 +16,28 @@ export class CartService {
   apiUrl: string = 'http://localhost:3000/';
   constructor(
     private http: HttpClient,
-    // public loginService: LoginService,
+    public loginService: LoginService,
   ) {}
 
-  // getAllProducts(email: string): Observable<CartItems[]> | undefined {
-  //   const emailObj = { email: email };
-  //   return this.http.post<CartItems[]>(this.apiUrl + 'cartItems', emailObj);
-  // }
-
-  getAllProducts(): Observable<CartItems[]> | undefined {
-    // const emailObj = { email: email };
-    return this.http.get<CartItems[]>(this.apiUrl + 'cartItems');
+  getAllProducts(email: string): Observable<CartItems[]> | undefined {
+    const emailObj = { email: email };
+    return this.http.post<CartItems[]>(this.apiUrl + 'cartItems', emailObj);
   }
 
-  // getAllOrderedProducts(email: string): Observable<CartItems[]> {
-  //   const emailObj = { email: email };
-  //   return this.http.post<CartItems[]>(this.apiUrl + 'ordered', emailObj);
+  // getAllProducts(): Observable<CartItems[]> | undefined {
+  //   // const emailObj = { email: email };
+  //   return this.http.get<CartItems[]>(this.apiUrl + 'cartItems');
   // }
 
-  getAllOrderedProducts(): Observable<CartItems[]> {
-    // const emailObj = { email: email };
-    return this.http.get<CartItems[]>(this.apiUrl + 'ordered');
+  getAllOrderedProducts(email: string): Observable<CartItems[]> {
+    const emailObj = { email: email };
+    return this.http.post<CartItems[]>(this.apiUrl + 'ordered', emailObj);
   }
+
+  // getAllOrderedProducts(): Observable<CartItems[]> {
+  //   // const emailObj = { email: email };
+  //   return this.http.get<CartItems[]>(this.apiUrl + 'ordered');
+  // }
 
   updateProduct(product: CartItems) {
     return this.http.put<CartItems>(this.apiUrl + 'updateCartITem', product);
@@ -65,8 +66,8 @@ export class CartService {
   }
 
   getCartItems() {
-    this.getAllProducts()?.subscribe(
-      // this.getAllProducts(this.loginService.usernameEmail.value)?.subscribe(
+    // this.getAllProducts()?.subscribe(
+      this.getAllProducts(this.loginService.usernameEmail.value)?.subscribe(
       (res: CartItems[]) => {
         let alreadyInProductArray: boolean = false;
 

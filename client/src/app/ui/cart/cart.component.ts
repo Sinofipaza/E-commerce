@@ -56,6 +56,7 @@ export class CartComponent implements OnInit {
     }
 
     this.cartService.getCartItems();
+    console.log(this.productService.products());
   }
 
   shippingCharges: number = 20;
@@ -118,16 +119,16 @@ export class CartComponent implements OnInit {
   // }
 
   decreaseQuantity(item: CartItems) {
-    const myProduct: ProductsInterface | undefined = this.productService
-      .products()
-      .find((product) => product.name === item.name);
-    if (myProduct) {
-      myProduct.on_hand++;
-      this.productService
-        .updateProductOnHnd(myProduct.id, myProduct)
-        .subscribe((data) => {
-        });
-    }
+    // const myProduct: ProductsInterface | undefined = this.productService
+    //   .products()
+    //   .find((product) => product.name === item.name);
+    // if (myProduct) {
+    //   myProduct.on_hand++;
+    //   this.productService
+    //     .updateProductOnHnd(myProduct.id, myProduct)
+    //     .subscribe((data) => {
+    //     });
+    // }
 
     item.quantity--;
 
@@ -139,19 +140,20 @@ export class CartComponent implements OnInit {
     this.cartService.updateProduct(item).subscribe((data) => {});
   }
   increaseQuantity(item: CartItems) {
-    const myProduct: ProductsInterface | undefined = this.productService
-      .products()
-      .find((product) => product.name === item.name);
-    if (myProduct && myProduct.on_hand - 1 > 1) {
-      myProduct.on_hand--;
-      this.productService
-        .updateProductOnHnd(myProduct.id, myProduct)
-        .subscribe((data) => {
-        });
-    } else {
-      alert('Products selected exceeds available stock');
-      return;
-    }
+    // const myProduct: ProductsInterface | undefined = this.productService
+    //   .products()
+    //   .find((product) => product.name === item.name);
+
+    // if (myProduct && myProduct.on_hand - 1 > 1) {
+    //   myProduct.on_hand--;
+    //   this.productService
+    //     .updateProductOnHnd(myProduct.id, myProduct)
+    //     .subscribe((data) => {
+    //     });
+    // } else {
+    //   alert('Products selected exceeds available stock');
+    //   return;
+    // }
     item.quantity++;
     this.cartService.updateProduct(item).subscribe((data) => {
       console.log(data);
