@@ -5,6 +5,7 @@
             "server": "localhost",
             "port": 5432,
             "driver": "PostgreSQL",
+<<<<<<< HEAD
             "name": "nt_db",
             "database": "nt_db",
             "username": "postgres",
@@ -17,6 +18,10 @@
             "driver": "PostgreSQL",
             "name": "merchday",
             "database": "merchday",
+=======
+            "name": "products",
+            "database": "productsdb",
+>>>>>>> fe013f6 (Endpoints specified, services created)
             "username": "postgres",
             "password": ""
         }

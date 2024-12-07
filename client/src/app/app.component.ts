@@ -6,11 +6,12 @@ import {  ReactiveFormsModule} from '@angular/forms';
 import { CartComponent } from './ui/cart/cart.component';
 import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
+import { ProductsPageComponent } from './ui/products-page/products-page.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, NavComponent, RouterLink, ReactiveFormsModule, ReactiveFormsModule,CartComponent, LoginComponent, RegisterComponent],
+  imports: [RouterOutlet, FooterComponent, NavComponent, RouterLink, ReactiveFormsModule, ReactiveFormsModule,CartComponent, LoginComponent, RegisterComponent, ProductsPageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
