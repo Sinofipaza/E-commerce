@@ -25,6 +25,7 @@ import { ProductDetailsComponent } from './ui/product-details/product-details.co
     ProductsPageComponent,
     ProductsPageComponent,
     ProductDetailsComponent,
+    FooterComponent, NavComponent, RouterLink
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
