@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsInterface } from '../types/products.interface';
 
@@ -7,9 +7,11 @@ import { ProductsInterface } from '../types/products.interface';
   providedIn: 'root',
 })
 export class ProductsService {
-  url = 'http://localhost:3000'
+  url = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
+
+  products = signal<ProductsInterface[]>([]);
 
   getProducts(): Observable<ProductsInterface[]> {
     return this.http.get<ProductsInterface[]>(`${this.url}/products`);
@@ -18,4 +20,6 @@ export class ProductsService {
   getProductById(id: number): Observable<ProductsInterface[]> {
     return this.http.get<ProductsInterface[]>(`${this.url}/products/${id}`);
   }
+
+
 }

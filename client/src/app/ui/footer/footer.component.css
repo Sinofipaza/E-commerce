@@ -1,0 +1,80 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bokor&family=DynaPuff:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+footer {
+    margin: 0;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    font-size: 14px;
+}
+.option-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+    text-align: left;
+}
+.option-container>div {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+}
+.option-container a {
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+}
+.option-container a:hover {
+    text-decoration: underline;
+}
+#logos {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+}
+
+.logo-link img {
+    height: 24px;
+    width: 24px;
+    margin: 5px;
+    transition: transform 0.3s ease;
+}
+
+.logo-link img:hover {
+    transform: scale(1.4);
+}
+
+/* for mobile */
+@media (max-width: 768px) {
+    .option-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+    .option-container>div {
+        flex: none;
+        min-width: unset;
+    }
+    #logos {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    footer {
+        padding: 15px 10px;
+    }
+
+    .option-container a {
+        font-size: 11px;
+    }
+
+    .logo-link img {
+        height: 20px;
+        width: 20px;
+    }
+}

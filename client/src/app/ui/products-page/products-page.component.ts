@@ -19,6 +19,9 @@ export class ProductsPageComponent implements OnInit {
     this.productService.getProducts()
       .subscribe(response => {
         this.products = response;
+        this.products.forEach((product) => {
+          this.productService.products().push(product);
+        });
       })
   }
 

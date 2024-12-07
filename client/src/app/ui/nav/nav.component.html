@@ -1,0 +1,102 @@
+<div class="nav-body">
+  <nav class="navbar navbar-expand-lg name-container">
+    <div
+      class="container-fluid d-flex justify-content-between align-items-center"
+    >
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img [src]="logo" alt="Logo" class="me-2" />
+        <span>MerchDay</span>
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarContent"
+        aria-controls="navbarContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <div class="d-flex align-items-center ms-auto icon-container">
+          <a class="icon-link" routerLink="#" aria-label="Favorites">
+            <img src="icons/heart-outline.svg" alt="Favorites" />
+          </a>
+          @if(loginService.usernameEmail.value != ""){
+          <a class="icon-link me-3" routerLink="/cart" aria-label="Cart">
+            <img src="icons/cart-outline.svg" alt="Cart" />
+          </a>
+        }@else {
+          <a class="icon-link me-3" (click)="alertFunct()" aria-label="Cart">
+            <img src="icons/cart-outline.svg" alt="Cart" />
+          </a>
+        }
+          <div class="dropdown">
+            <a
+              class="icon-link dropdown-toggle"
+              id="accountDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              aria-label="Account"
+              role="button"
+            >
+              <img src="icons/account-circle-outline.svg" alt="Account" />
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="accountDropdown"
+            >
+               <li *ngIf="loginService.usernameEmail.value === ''">
+              <a class="dropdown-item" routerLink="login">Login</a>
+            </li>
+            <li *ngIf="loginService.usernameEmail.value === ''">
+              <a class="dropdown-item" routerLink="register">Register</a>
+            </li>
+
+              <!-- This part will be shown if the user is logged in -->
+              <li *ngIf="loginService.usernameEmail.value !== ''">
+              <a class="dropdown-item" (click)="loginService.logout()" routerLink="">Logout</a>
+            </li>
+              @if(loginService.usernameEmail.value != ""){
+              <li>
+                <a class="dropdown-item" routerLink="/orders">Orders</a>
+              </li>
+              }@else {
+              <li>
+                <a class="dropdown-item" (click)="alertFunct()">Orders</a>
+              </li>
+              }
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar">
+    <div class="sports-container">
+      <ul class="navbar-nav d-flex flex-row me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="#">
+            {{ menuList[0] }}</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="#"> {{ menuList[1] }} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="#"> {{ menuList[2] }} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="#"> {{ menuList[3] }} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="#"> {{ menuList[4] }} </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
