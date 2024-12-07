@@ -9,6 +9,7 @@ import { AboutComponent } from './ui/about/about.component';
 import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { ProductsPageComponent } from './ui/products-page/products-page.component';
+import { LandingPageComponent } from './ui/landing-page/landing-page.component';
 
 
 
@@ -50,5 +51,6 @@ export const routes: Routes = [
     component: ProductDetailsComponent,
     pathMatch: 'full',
   },
+  { path: '', component: LandingPageComponent },
 ];
 

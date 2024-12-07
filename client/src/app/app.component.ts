@@ -8,6 +8,7 @@ import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { ProductsPageComponent } from './ui/products-page/products-page.component';
 import { ProductDetailsComponent } from './ui/product-details/product-details.component';
+import { LandingPageComponent } from './ui/landing-page/landing-page.component';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +26,12 @@ import { ProductDetailsComponent } from './ui/product-details/product-details.co
     ProductsPageComponent,
     ProductsPageComponent,
     ProductDetailsComponent,
-    FooterComponent, NavComponent, RouterLink
-    ,LoginComponent
-    ,RegisterComponent
+    FooterComponent,
+    NavComponent,
+    RouterLink,
+    LoginComponent,
+    RegisterComponent,
+    LandingPageComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
