@@ -12,7 +12,6 @@ app.get("/cartItems", async (req, res) => {
       `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=false AND quantity>0  ORDER BY price ASC`
       // `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=false AND quantity>0 AND username=\'${email}\' ORDER BY price ASC`
     );
-    console.log(result)
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);
