@@ -29,7 +29,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-   constructor(private fb: FormBuilder, public loginService: LoginService) {
+   constructor(private fb: FormBuilder, public loginService: LoginService, public router:Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -38,8 +38,10 @@ export class LoginComponent {
 
   onSubmit() : void {
     if (this.loginForm.valid) {
+      console.log(this.loginForm.value.email,+" "+ this.loginForm.value.password);
       this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response) => {})
-    alert('Form submitted successfully');
+      alert('Form submitted successfully');
+      this.router.navigate(['/products']);
     } else {
       alert('Form is invalid');
     }

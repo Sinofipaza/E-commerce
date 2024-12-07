@@ -22,12 +22,12 @@
   
           <div class=" mb-4">
             <label for="password">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               minlength="6"
-              class="form-control" 
-              id="password" 
-              formControlName="password" 
+              class="form-control"
+              id="password"
+              formControlName="password"
               required>
             <div *ngIf="loginForm.controls['password']?.touched && loginForm.controls['password']?.invalid" class="text-danger mt-1">
               Password is required.
@@ -35,7 +35,7 @@
           </div>
 
           <!-- Login Button -->
-          <button type="submit" class="btn btn-dark w-100">Login</button>
+           <button type="submit"  class="btn btn-dark w-100" >Login </button>
           <p class="mt-2">Don't have an account? <a href="/register" class="register-here fw-bold">Register Here!</a></p>
 
         </form>

@@ -3,6 +3,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductsInterface } from '../../types/products.interface';
 import { ProductsService } from '../../services/products.service';
 import { CommonModule } from '@angular/common';
+import { LoginService } from '../../services/login.service';
+import { CartService } from '../../services/cart.service';
+import { CartItems } from '../../types/cartInterface.interface';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +20,9 @@ export class ProductDetailsComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private loginService: LoginService,
+    private cartService: CartService,
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +55,41 @@ export class ProductDetailsComponent {
   addToCart() {
     if (this.product) {
       alert(`Product "${this.product.name}" added to cart!`);
+      let username = this.loginService.usernameEmail.value;
+      let softDelete = false;
+      let ordered = false;
+      let quantity = 1;
+
+      this.product.on_hand--;
+
+      // console.log(this.product.on_hand);
+
+      const { id, name, short_description, price, thumbnail_url } =
+        this.product;
+      let cartItem: CartItems = {
+        id,
+        username,
+        name: name,
+        description: short_description,
+        price: price,
+        quantity: quantity,
+        imageurl: thumbnail_url,
+        softdelete: softDelete,
+        ordered: ordered,
+      };
+      this.route.params.subscribe((params) => {
+        const productId = Number(params['id']);
+        // console.log("productId: " + productId);
+        this.productsService
+          .updateProductOnHnd(productId, this.product)
+          .subscribe((response) => {});
+      });
+
+      this.cartService.saveCartProduct(cartItem).subscribe((data) => {
+        console.log(this.cartService.CartItemsArray().length);
+      });
+      // this.cartService.throughCart = true;
+      this.router.navigate(['/cart']);
     } else {
       alert('Product details are not available');
     }

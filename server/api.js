@@ -1,21 +1,24 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { pool } from "./database/databaseConnection.js";
+import {app} from "./routes/expressApp.js"
 
-import { pool } from './dbConfig.js'
+// import { pool } from './dbConfig.js'
 
 import { pool } from './dbConfig.js'
 
 const app = express();
 
-app.use(express.json());
-app.use(cors());
-app.use(bodyParser.json());
+// app.use(express.json());
+// app.use(cors());
+// app.use(bodyParser.json());
 
 //login endpoint
-app.get('/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     const email = req.body.email;
-    const password = req.body.password;
+  const password = req.body.password;
+  console.log({ email, password });
 
     try {
         const results = await pool.query(
@@ -112,6 +115,7 @@ app.get("/products", async (req, res) => {
     const results = await pool.query(
       "SELECT id, name, price, short_description, thumbnail_url FROM products;"
     );
+    
     res.json(results.rows);
   } catch (error) {
     console.log(error);
@@ -132,11 +136,11 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
-export { app };
+// export { app };
 //when user registers on the platform
 app.post('/register', async (req, res) => {
     const { name, surname, phone_number, email, password } = req.body;
-    console.log({name, surname, phone_number, email, password});
+    // console.log({name, surname, phone_number, email, password});
     try {
         const result = await pool.query('INSERT INTO users (name, surname, phone_number, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *', 
             [name, surname, phone_number, email, password]
@@ -146,12 +150,12 @@ app.post('/register', async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-    
+
 });
 //email update
 app.patch('/update-email/:id', async (req, res) => {
     const { id } = req.params;
-    const { email } = req.body; 
+    const { email } = req.body;
     
     try {
       const result = await pool.query(
@@ -189,9 +193,9 @@ app.patch('/update-name/:id', async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   });
-  
-  
-  //for deleting user 
+
+
+  //for deleting user
   app.delete("/delete-user/:id", async (req, res) => {
     const { id } = req.params;
     const result = await pool.query(

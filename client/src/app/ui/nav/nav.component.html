@@ -24,9 +24,15 @@
           <a class="icon-link" routerLink="#" aria-label="Favorites">
             <img src="icons/heart-outline.svg" alt="Favorites" />
           </a>
-          <a class="icon-link me-3" routerLink="#" aria-label="Cart">
+          @if(loginService.usernameEmail.value != ""){
+          <a class="icon-link me-3" routerLink="/cart" aria-label="Cart">
             <img src="icons/cart-outline.svg" alt="Cart" />
           </a>
+        }@else {
+          <a class="icon-link me-3" (click)="alertFunct()" aria-label="Cart">
+            <img src="icons/cart-outline.svg" alt="Cart" />
+          </a>
+        }
           <div class="dropdown">
             <a
               class="icon-link dropdown-toggle"
@@ -42,11 +48,27 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="accountDropdown"
             >
-              <li><a class="dropdown-item" routerLink="/orders">Login</a></li>
-              <li><a class="dropdown-item" routerLink="/login">Register</a></li>
+               <li *ngIf="loginService.usernameEmail.value === ''">
+              <a class="dropdown-item" routerLink="login">Login</a>
+            </li>
+            <li *ngIf="loginService.usernameEmail.value === ''">
+              <a class="dropdown-item" routerLink="register">Register</a>
+            </li>
+
+              <!-- This part will be shown if the user is logged in -->
+              <li *ngIf="loginService.usernameEmail.value !== ''">
+              <a class="dropdown-item" (click)="loginService.logout()" routerLink="">Logout</a>
+            </li>
+              @if(loginService.usernameEmail.value != ""){
               <li>
-                <a class="dropdown-item" routerLink="/register">Orders</a>
+                <a class="dropdown-item" routerLink="/orders">Orders</a>
               </li>
+              }@else {
+              <li>
+                <a class="dropdown-item" (click)="alertFunct()">Orders</a>
+              </li>
+              }
+              
             </ul>
           </div>
         </div>
