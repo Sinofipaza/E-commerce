@@ -7,11 +7,25 @@ import { CartComponent } from './ui/cart/cart.component';
 import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { ProductsPageComponent } from './ui/products-page/products-page.component';
+import { ProductDetailsComponent } from './ui/product-details/product-details.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, NavComponent, RouterLink, ReactiveFormsModule, ReactiveFormsModule,CartComponent, LoginComponent, RegisterComponent, ProductsPageComponent],
+  imports: [
+    RouterOutlet,
+    FooterComponent,
+    NavComponent,
+    RouterLink,
+    ReactiveFormsModule,
+    ReactiveFormsModule,
+    CartComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProductsPageComponent,
+    ProductsPageComponent,
+    ProductDetailsComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
