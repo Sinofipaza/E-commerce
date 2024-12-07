@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 
 import { pool } from './dbConfig.js'
 
+import { pool } from './dbConfig.js'
+
 const app = express();
 
 app.use(express.json());
