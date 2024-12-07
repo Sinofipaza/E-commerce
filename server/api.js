@@ -6,9 +6,9 @@ import {app} from "./routes/expressApp.js"
 
 // import { pool } from './dbConfig.js'
 
-import { pool } from './dbConfig.js'
+// import { pool } from './dbConfig.js'
 
-const app = express();
+// const app = express();
 
 // app.use(express.json());
 // app.use(cors());
@@ -142,7 +142,7 @@ app.post('/register', async (req, res) => {
     const { name, surname, phone_number, email, password } = req.body;
     // console.log({name, surname, phone_number, email, password});
     try {
-        const result = await pool.query('INSERT INTO users (name, surname, phone_number, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *', 
+        const result = await pool.query('INSERT INTO users (name, surname, phone_number, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *',
             [name, surname, phone_number, email, password]
         );
         res.json(result.rows)
