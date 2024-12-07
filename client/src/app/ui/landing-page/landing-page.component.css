@@ -1,0 +1,64 @@
+.app {
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-image: url('/images/pinkbg.png');
+    background-position: center;
+    padding: 7rem 0;
+}
+
+
+.shopbtn {
+    text-transform: uppercase;
+    border-radius: 1rem;
+    padding: .7rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border: none;
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.shopbtn:hover {
+    background-color: black;
+    color:white;
+    transform: translateY(-3px);
+}
+
+.shopbtn:active {
+    transform: translateY(1px);
+}
+
+.container {
+    width: 60%;
+    padding: 2rem;
+    margin-top: 200px;
+    margin-left: 4rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-family:'Libre Baskerville', serif;
+    text-align: center;
+    color: #fff;
+}
+
+@media (min-width: 88px) and (max-width: 1024px) {
+    .app {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), ), url('/images/Responsive.png');
+        background-position: center;
+    }
+    .container {
+        margin: 0;
+        min-width: 100%;
+    }   
+}
+
+@media (min-width: 360px) and (max-width: 884px) {
+    .app {
+        background-image: url('/images/Responsive.png'); 
+    }
+    .container {
+        margin: 0;
+    }   
+}
