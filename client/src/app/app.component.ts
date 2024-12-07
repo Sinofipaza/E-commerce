@@ -12,6 +12,7 @@ import { ProductDetailsComponent } from './ui/product-details/product-details.co
 @Component({
   selector: 'app-root',
   standalone: true,
+
   imports: [
     RouterOutlet,
     FooterComponent,
@@ -26,7 +27,9 @@ import { ProductDetailsComponent } from './ui/product-details/product-details.co
     ProductsPageComponent,
     ProductDetailsComponent,
     FooterComponent, NavComponent, RouterLink
+    , LoginComponent
   ],
+
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
