@@ -5,6 +5,7 @@ import { pool } from "./database/databaseConnection.js";
 import {app} from "./routes/expressApp.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { verifyToken } from 'auth.js';
 
 // import { pool } from './dbConfig.js'
 
@@ -80,7 +81,7 @@ app.post('/register', async (req, res) => {
     
 });
 //email update
-app.patch('/update-email/:id', async (req, res) => {
+app.patch('/update-email/:id', verifyToken, async (req, res) => {
     const { id } = req.params;
     const { email } = req.body; 
     
@@ -101,7 +102,7 @@ app.patch('/update-email/:id', async (req, res) => {
   });
 
   //update user name
-app.patch('/update-name/:id', async (req, res) => {
+app.patch('/update-name/:id', verifyToken, async (req, res) => {
     const { id } = req.params;
     const { name, surname } = req.body; // New name and surname to update
     
@@ -123,7 +124,7 @@ app.patch('/update-name/:id', async (req, res) => {
   
   
   //for deleting user 
-  app.delete("/delete-user/:id", async (req, res) => {
+  app.delete("/delete-user/:id", verifyToken, async (req, res) => {
     const { id } = req.params;
     const result = await pool.query(
       `DELETE FROM users WHERE id = $1 RETURNING *`,
