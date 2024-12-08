@@ -140,9 +140,21 @@ export class CartComponent implements OnInit {
     this.cartService.updateProduct(item).subscribe((data) => {});
   }
   increaseQuantity(item: CartItems) {
-    // const myProduct: ProductsInterface | undefined = this.productService
-    //   .products()
-    //   .find((product) => product.name === item.name);
+    const myProduct: ProductsInterface | undefined = this.productService
+      .products()
+      .find((product) => product.name === item.name);
+
+      if (myProduct) {
+        if (myProduct.on_hand - item.quantity > 0) {
+          item.quantity++;
+          this.cartService.updateProduct(item).subscribe((data) => {
+            console.log(data);
+          });
+          } else {
+            alert('Products selected exceeds available stock');
+            return;
+    
+      }
 
     // if (myProduct && myProduct.on_hand - 1 > 1) {
     //   myProduct.on_hand--;
