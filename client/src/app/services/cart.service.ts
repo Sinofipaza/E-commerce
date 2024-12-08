@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { CartItems } from '../types/cartInterface.interface';
 import { Observable, Subscription } from 'rxjs';
 import { LoginService } from './login.service';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class CartService {
   subscriptionList: Subscription[] = [];
   throughCart: boolean = false;
 
-  apiUrl: string = 'http://localhost:3000/';
+  // apiUrl: string = 'http://localhost:3000/';
+  apiUrl: string = environment.SERVER
   constructor(
     private http: HttpClient,
     public loginService: LoginService,

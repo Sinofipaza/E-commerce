@@ -9,6 +9,9 @@ import {app} from "./routes/expressApp.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { verifyToken } from 'auth.js';
+// import { pool } from "./database/databaseConnection.js";
+import { app } from "./routes/expressApp.js"
+// import bcrypt from "bcrypt";
 
 import { pool } from './dbConfig.js'
 
@@ -18,20 +21,36 @@ const app = express();
 // app.use(cors());
 // app.use(bodyParser.json());
 
+
+
+
+
+// const salt = bcrypt.genSaltSync(saltRounds);
+
+//Technique 1
+// const hash = bcrypt.hashSync(myPlaintextPassword, salt);
+
+// Technique 2
+// const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+// console.log(hash);
+// console.log(bcrypt.compareSync(myPlaintextPassword, hash));
+// console.log(bcrypt.compareSync(someOtherPlaintextPassword, hash));
+
 //login endpoint
 app.post('/login', async (req, res) => {
     const email = req.body.email;
   const password = req.body.password;
   console.log({ email, password });
 
-    try {
-      //find user by email
-      //find user by email
+  try {
+      
+    const saltRounds = 10;
+    const myPlaintextPassword = password;
+
+    const encryptedPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
         const results = await pool.query(
-            'SELECT * FROM users WHERE email = $1',
-            [email]
-            'SELECT * FROM users WHERE email = $1',
-            [email]
+            'SELECT * FROM users WHERE email = $1 AND password = $2',
+            [email, encryptedPassword]
         );
 
         if (results.rows.length === 0) {
@@ -62,8 +81,16 @@ app.post('/login', async (req, res) => {
 
 //when user registers on the platform
 app.post('/register', async (req, res) => {
-    const { name, surname, phone_number, email, password } = req.body;
+  
+  const { name, surname, phone_number, email, password } = req.body;
 
+  const saltRounds = 10;
+  const myPlaintextPassword = password;
+
+  const encryptedPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+
+  
+    // console.log({name, surname, phone_number, email, password});
     try {
 //checks duplicate users
       const userExists = await pool.query('SELECT * FROM users WHERE email = $!', [email]);
@@ -75,8 +102,7 @@ app.post('/register', async (req, res) => {
       
         // saves user's details into the database
         const result = await pool.query('INSERT INTO users (name, surname, phone_number, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *', 
-            [name, surname, phone_number, email, hashedPassword]
-            [name, surname, phone_number, email, hashedPassword]
+            [name, surname, phone_number, email, encryptedPassword]
         );
 
         const token = jwt.sign(
