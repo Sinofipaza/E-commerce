@@ -1,24 +1,3 @@
 {
-    "sqltools.connections": [
-        {
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 5432,
-            "driver": "PostgreSQL",
-            "name": "nt_db",
-            "database": "nt_db",
-            "username": "postgres",
-            "password": ""
-        },
-        {
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 5432,
-            "driver": "PostgreSQL",
-            "name": "merchday",
-            "database": "merchday",
-            "username": "postgres",
-            "password": ""
-        }
-    ]
+    "sqltools.connections": []
 }
