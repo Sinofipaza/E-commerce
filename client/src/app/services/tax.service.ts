@@ -14,3 +14,8 @@ export class TaxService {
   constructor() { }
 
 }
+
+  // calculate() {
+  //   this.taxAmount = this.taxService.taxAmount(this.purchaseAmount, this.taxRate);
+  //   this.totalAmount = this.taxService.totalAmount(this.purchaseAmount, this.taxRate);
+  // }
