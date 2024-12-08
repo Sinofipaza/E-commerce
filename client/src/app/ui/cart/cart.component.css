@@ -1,3 +1,19 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+.shipping-info {
+  background:black;
+  padding: 20px;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.shipping-inputs {
+  color: black !important;
+}
+
 .payment-info {
   background:blue;
   padding: 20px;
@@ -144,6 +160,20 @@ label.radio input:checked + span {
 }
 
 .btn-checkout:hover {
+  background-color: white;
+  color: black;
+}
+
+.btn-pay {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-style: none;
+  border: 2px solid white;
+  
+}
+
+.btn-pay:hover {
   background-color: white;
   color: black;
 }
