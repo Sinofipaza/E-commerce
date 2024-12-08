@@ -70,3 +70,9 @@ VALUES
  'Authentic Manchester Thunder netball jersey.', 
  'Support the Thunder in style with this high-quality, breathable netball jersey.', 
  'https://www.manchesterthunder.co.uk/wp-content/uploads/2022/04/Laura-Malcolm-2022.jpg');
+
+ ALTER TABLE products
+ADD COLUMN on_hand INT DEFAULT 0;
+
+ALTER TABLE products
+ADD CONSTRAINT check_on_hand_nonnegative CHECK (on_hand >= 0);
