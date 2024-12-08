@@ -21,6 +21,8 @@ import { ProductsInterface } from '../../types/products.interface';
 export class CartComponent implements OnInit {
   products: ProductsInterface[] = [];
   cartForm: FormGroup;
+  shippingForm: FormGroup;
+  payBtn: boolean = false;
 
   private formBuilder = inject(FormBuilder);
   constructor(
@@ -36,27 +38,34 @@ export class CartComponent implements OnInit {
       date: ['', [Validators.required, Validators.minLength(3)]],
       cvv: ['', [Validators.required, Validators.minLength(3)]],
     });
+    this.shippingForm = this.fb.group({
+      street: ['', [Validators.required, Validators.minLength(2)]],
+      suburb: ['', [Validators.required, Validators.maxLength(16)]],
+      postalCode: ['', [Validators.required, Validators.minLength(4)]],
+      phoneNumber: ['', [Validators.required, Validators.minLength(10)]],
+      email: ['', [Validators.required, Validators.minLength(3)]],
+    });
   }
   ngOnInit(): void {
-    this.productService.getProducts().subscribe({
-      next: (products) => {
-        products.forEach((product) => {
-          this.productService.products().push(product);
-        });
-        this.products = products;
-      },
-      error: (err) => {
-        console.error('Error fetching products:', err);
-      },
-    });
+    // this.productService.getProducts().subscribe({
+    //   next: (products) => {
+    //     products.forEach((product) => {
+    //       this.productService.products().push(product);
+    //     });
+    //     this.products = products;
+    //   },
+    //   error: (err) => {
+    //     console.error('Error fetching products:', err);
+    //   },
+    // });
 
-    if (this.cartService.throughCart) {
-      this.reloadFunc();
-      this.cartService.throughCart = false;
-    }
+    // if (this.cartService.throughCart) {
+    //   this.reloadFunc();
+    //   this.cartService.throughCart = false;
+    // }
 
-    this.cartService.getCartItems();
-    console.log(this.productService.products());
+    // this.cartService.getCartItems();
+    // console.log(this.productService.products());
   }
 
   shippingCharges: number = 20;
@@ -153,7 +162,7 @@ export class CartComponent implements OnInit {
           } else {
             alert('Products selected exceeds available stock');
             return;
-    
+
       }
 
     // if (myProduct && myProduct.on_hand - 1 > 1) {
