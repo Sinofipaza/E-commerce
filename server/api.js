@@ -19,16 +19,16 @@ app.post('/login', async (req, res) => {
     const password = req.body.password;
 
     try {
+      //find user by email
         const results = await pool.query(
-            'SELECT * FROM users WHERE email = $1 AND password = $2',
-            [email, password]
+            'SELECT * FROM users WHERE email = $1',
+            [email]
         );
 
         if (results.rows.length === 0) {
             return res.status(401).json({ message: 'Invalid credentials' });
-        } else {
-            res .status(200).json({message: "Login succssful", user: results.rows[0]})
-        }
+        } 
+        const user = results.rows[0];
 
         //this comparess the hashed password
         const isMatch = await bcrypt.compare(password, user.password);
@@ -40,11 +40,13 @@ app.post('/login', async (req, res) => {
           { id: user.id, email: user.email },
           process.env.JWT_SECRET,
           { expiresIn: '1h'}
-        )
+        );
+
+        res.status(200).json({ message: "Login successful", token});
     }
     catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).json('Server error');
     }
 });
 
@@ -53,12 +55,17 @@ app.post('/register', async (req, res) => {
     const { name, surname, phone_number, email, password } = req.body;
 
     try {
+//checks duplicate users
+      const userExists = await pool.query('SELECT * FROM users WHERE email = $!', [email]);
+      if (userExists.rows.length > 0) {
+        return res.status(400).json({ message: 'Email already exists' });
+      } 
 
       const hashedPassword = await bcrypt.hash(password, 10);
       
         // saves user's details into the database
         const result = await pool.query('INSERT INTO users (name, surname, phone_number, email, password) VALUES($1, $2, $3, $4, $5) RETURNING *', 
-            [name, surname, phone_number, email, password]
+            [name, surname, phone_number, email, hashedPassword]
         );
 
         const token = jwt.sign(
@@ -67,7 +74,7 @@ app.post('/register', async (req, res) => {
           { expiresIn: '1h'}
         );
 
-        req.status(201).json({ message: "User registered successfully", token});
+        res.status(201).json({ message: "User registered successfully", token});
         // res.json(result.rows)
     } catch (err) {
         console.error(err.message);
