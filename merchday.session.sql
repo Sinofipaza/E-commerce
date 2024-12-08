@@ -1,4 +1,6 @@
-CREATE TABLE users (
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
@@ -14,3 +16,15 @@ INSERT INTO users (name, surname, phone_number, email, password) VALUES
 ('Ofentse', 'Mahlangu', '0123456789', 'ofentse@gmail.com', '000000');
 
 SELECT * FROM users;
+
+CREATE TABLE IF NOT EXISTS myCartTable(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100),
+    name VARCHAR(255),
+    description VARCHAR(500),
+    price FLOAT,
+    quantity INTEGER,
+    imageUrl VARCHAR(300),
+    softDelete BOOLEAN,
+    ordered BOOLEAN
+)

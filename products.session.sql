@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS products;
+-- DROP TABLE IF EXISTS products;
 
 CREATE TABLE IF NOT EXISTS products(
     id SERIAL PRIMARY KEY,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS products(
     thumbnail_url TEXT
 )
 
-INSERT INTO products(name, price, short_description, long_description, thumbnail_url)
+INSERT INTO products (name, price, short_description, long_description, thumbnail_url)
 VALUES
 -- Chelsea
 ('Chelsea FC Home Jersey', 89.99, 
@@ -70,3 +70,10 @@ VALUES
  'Authentic Manchester Thunder netball jersey.', 
  'Support the Thunder in style with this high-quality, breathable netball jersey.', 
  'https://www.manchesterthunder.co.uk/wp-content/uploads/2022/04/Laura-Malcolm-2022.jpg');
+
+ALTER TABLE products
+ADD COLUMN on_hand INT DEFAULT 0;
+
+ALTER TABLE products
+ADD CONSTRAINT check_on_hand_nonnegative CHECK (on_hand >= 0);
+
