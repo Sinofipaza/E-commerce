@@ -13,7 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 export class ProductsPageComponent implements OnInit {
   products: ProductsInterface[] | null = [];
   
-  constructor(private router: Router, private productService: ProductsService) {}
+  constructor(private router: Router, private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.productService.getProducts()
