@@ -38,10 +38,20 @@ export class LoginComponent {
 
   onSubmit() : void {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value.email,+" "+ this.loginForm.value.password);
-      this.loginService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response) => {})
-      alert('Form submitted successfully');
-      this.router.navigate(['/products']);
+      console.log(this.loginForm.value.email, +" " + this.loginForm.value.password);
+      try {
+        this.loginService
+          .login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response) => {
+            console.log('Success');
+          });
+        this.router.navigate(['/products']);
+      } catch (error){
+          alert("Invalid name or password")
+      }
+      
+      
+      // alert('Form submitted successfully');
+      
     } else {
       alert('Form is invalid');
     }
