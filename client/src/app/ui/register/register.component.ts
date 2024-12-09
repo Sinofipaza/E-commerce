@@ -37,7 +37,7 @@ export class RegisterComponent {
    */
   onSubmit(): void {
     if (this.registerForm.valid) {
-      this.registerForm.disable();
+      // this.registerForm.disable();
       console.log('Registration data:', this.registerForm.value);
       this.loginService
         .register(

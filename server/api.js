@@ -9,8 +9,6 @@ import {app} from "./routes/expressApp.js"
 import { jwtDecode } from "jwt-decode";
 
 
-
-
 //login endpoint
 app.post('/login', async (req, res) => {
     const email = req.body.email;
@@ -57,7 +55,6 @@ app.post('/register', async (req, res) => {
   const myPlaintextPassword = password;
   const encryptedPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
 
-  
     try {
 //checks duplicate users
       const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);

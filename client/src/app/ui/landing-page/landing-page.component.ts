@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductsPageComponent } from '../products-page/products-page.component';
 import { RouterLink } from '@angular/router';
-import { ProductsPageComponent } from '../products-page/products-page.component';
 import { Router } from '@angular/router'; 
 
 @Component({
