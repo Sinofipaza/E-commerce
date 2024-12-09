@@ -237,4 +237,4 @@ export class CartComponent implements OnInit {
     let regex = /^[0-9]{3}$/;
     return regex.test(cvv.trim());
   }
-}
+}}
