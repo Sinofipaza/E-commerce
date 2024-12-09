@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ProductsPageComponent } from '../products-page/products-page.component';
 import { RouterLink } from '@angular/router';
+import { ProductsPageComponent } from '../products-page/products-page.component';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-landing-page',
@@ -10,4 +12,13 @@ import { RouterLink } from '@angular/router';
   ,
   styleUrl: './landing-page.component.css',
 })
-export class LandingPageComponent {}
+
+
+export class LandingPageComponent {
+
+  constructor(private router: Router) { }
+
+  showProducts() {
+    this.router.navigate(['/products']);
+  }
+}

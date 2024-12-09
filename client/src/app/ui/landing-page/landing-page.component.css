@@ -6,6 +6,10 @@
     padding: 7rem 0;
 }
 
+a {
+    text-decoration: none;
+    color: inherit; /* Makes the link color inherit from the parent */
+  }
 
 .shopbtn {
     text-transform: uppercase;
@@ -33,10 +37,10 @@
 }
 
 .container {
-    width: 60%;
+    width: 59%;
     padding: 2rem;
     margin-top: 200px;
-    margin-left: 4rem;
+    margin-left: 7rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-family:'Libre Baskerville', serif;
     text-align: center;
