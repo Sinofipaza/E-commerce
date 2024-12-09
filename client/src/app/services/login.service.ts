@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LoginToken } from '../types/LoginToken.interface';
 import { environment } from '../../environments/environment.development';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class LoginService {
   token: LoginToken = {};
   usernameEmail: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router: Router) {
     const storedEmail = localStorage.getItem('userEmail');
     if (storedEmail) {
       this.usernameEmail.next(storedEmail);
@@ -29,6 +30,9 @@ export class LoginService {
   logout() {
     localStorage.removeItem('token');
     this.usernameEmail.next('');
+    this.router.navigate(['']).then(() => {
+      window.location.reload();
+    })
   }
 
   register(
