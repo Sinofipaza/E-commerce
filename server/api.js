@@ -3,12 +3,9 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { verifyToken } from 'auth.js';
+import { verifyToken } from './auth.js';
 import { pool } from "./database/databaseConnection.js";
 import {app} from "./routes/expressApp.js"
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { verifyToken } from './auth.js';
 import { jwtDecode } from "jwt-decode";
 
 

@@ -89,85 +89,7 @@ export class CartComponent implements OnInit {
 
   shippingCharges: number = 20;
 
-  /**
-   * Calculates the total price for a single item in the cart.
-   *
-   * @param item - The item for which the total price needs to be calculated.
-   * @returns The total price for the item, rounded to two decimal places.
-   *
-   * @example
-   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
-   * const totalPrice = getTotalPerItemCount(item);
-   * console.log(totalPrice); // Output: 21.00
-   */
-  /**
-   * Calculates the total price for a single item in the cart.
-   *
-   * @param item - The item for which the total price needs to be calculated.
-   * The `item` parameter is an object of type `CartItems` that contains the properties:
-   * - `id` (number): The unique identifier of the item.
-   * - `name` (string): The name of the item.
-   * - `price` (number): The price of the item.
-   * - `quantity` (number): The quantity of the item in the cart.
-   *
-   * @returns The total price for the item, rounded to two decimal places.
-   *
-   * @example
-   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
-   * const totalPrice = getTotalPerItemCount(item);
-   * console.log(totalPrice); // Output: 21.00
-   */
-  /**
-   * Calculates the total price for a single item in the cart.
-   *
-   * @param item - The item for which the total price needs to be calculated.
-   * The `item` parameter is an object of type `CartItems` that contains the properties:
-   * - `id` (number): The unique identifier of the item.
-   * - `name` (string): The name of the item.
-   * - `price` (number): The price of the item.
-   * - `quantity` (number): The quantity of the item in the cart.
-   *
-   * @returns The total price for the item, rounded to two decimal places.
-   *
-   * @example
-   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
-   * const totalPrice = getTotalPerItemCount(item);
-   * console.log(totalPrice); // Output: 21.00
-   */
-  /**
-   * Calculates the total price for a single item in the cart.
-   *
-   * @param item - The item for which the total price needs to be calculated.
-   * The `item` parameter is an object of type `CartItems` that contains the properties:
-   * - `id` (number): The unique identifier of the item.
-   * - `name` (string): The name of the item.
-   * - `price` (number): The price of the item.
-   * - `quantity` (number): The quantity of the item in the cart.
-   *
-   * @returns The total price for the item, rounded to two decimal places.
-   *
-   * @example
-   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
-   * const totalPrice = getTotalPerItemCount(item);
-   * console.log(totalPrice); // Output: 21.00
-   */
-  /**
-   * Calculates the total price for a single item in the cart.
-   *
-   * @param item - The item for which the total price needs to be calculated.
-   * The `item` parameter is an object of type `CartItems` that contains the properties:
-   * - `id` (number): The unique identifier of the item.
-   * - `name` (string): The name of the item.
-   * - `price` (number): The price of the item.
-   * - `quantity` (number): The quantity of the item in the cart.
-   *
-   * @returns The total price for the item, rounded to two decimal places.
-   *
-   * @example
-   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
-   * const totalPrice = getTotalPerItemCount(item);
-   * console.log(totalPrice); // Output: 21.00
-   */
+
   /**
    * Calculates the total price for a single item in the cart.
    *
@@ -307,6 +229,7 @@ export class CartComponent implements OnInit {
     item.quantity++;
     this.cartService.updateProduct(item).subscribe((data) => {});
   }
+}
 
   getCartQuantity() {
     return this.cartService
@@ -353,6 +276,7 @@ export class CartComponent implements OnInit {
     let validRegEx = /^[A-Za-z]+$/;
     return validRegEx.test(name.trim());
   }
+
   validateCreditCard(creditNumber: string): boolean {
     let validRegex = /^\d+$/;
     if (
@@ -364,6 +288,7 @@ export class CartComponent implements OnInit {
     }
     return false;
   }
+
   validateDate(date: string): boolean {
     let re = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
     return re.test(date);
@@ -378,6 +303,7 @@ export class CartComponent implements OnInit {
     this.payBtn = true;
     return this.payBtn;
   }
+
   onSubmitTwo(): void {
     this.cartService.CartItemsArray().forEach((item) => {
       this.shippingService.addShippingAddress(
@@ -390,7 +316,7 @@ export class CartComponent implements OnInit {
       );
     });
     console.log(this.shippingForm.value);
-    
+
   }
 
   getCartItems() {
@@ -443,4 +369,8 @@ export class CartComponent implements OnInit {
       }
     }
   }
+
+
 }
+
+
