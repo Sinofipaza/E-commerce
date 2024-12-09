@@ -10,6 +10,8 @@ import { ProductsPageComponent } from './ui/products-page/products-page.componen
 import { ProductDetailsComponent } from './ui/product-details/product-details.component';
 import { LandingPageComponent } from './ui/landing-page/landing-page.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterOutlet } from '@angular/router';
+import { LandingPageComponent } from './ui/landing-page/landing-page.component';
 
 @Component({
   selector: 'app-root',
@@ -35,9 +37,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     LandingPageComponent,
     
   ],
+  imports: [RouterOutlet, LandingPageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
+
 export class AppComponent {
   title = 'E-commerce';
 }
