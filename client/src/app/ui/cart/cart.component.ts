@@ -390,7 +390,7 @@ export class CartComponent implements OnInit {
       );
     });
     console.log(this.shippingForm.value);
-
+    
   }
 
   getCartItems() {
