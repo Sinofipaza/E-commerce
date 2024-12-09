@@ -8,4 +8,5 @@ export interface CartItems {
   imageurl: string | null;
   softdelete: boolean;
   ordered: boolean;
+  address?: string | null;
 }

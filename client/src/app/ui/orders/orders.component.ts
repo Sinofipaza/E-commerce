@@ -3,6 +3,7 @@ import { CartItems } from '../../types/cartInterface.interface';
 import { CartService } from '../../services/cart.service';
 import { RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login.service';
+import { JwtHeaderService } from '../../services/jwt-interceptor.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,7 +13,7 @@ import { LoginService } from '../../services/login.service';
   styleUrl: './orders.component.css',
 })
 export class OrdersComponent implements OnInit {
-  constructor(public cartService: CartService, public loginService: LoginService) {
+  constructor(public cartService: CartService, public loginService: LoginService,public jwtHeaderService:JwtHeaderService) {
   }
   ngOnInit(): void {
     this.getOrderedItems();
@@ -20,7 +21,7 @@ export class OrdersComponent implements OnInit {
 
 
   getOrderedItems() {
-      this.cartService.getAllOrderedProducts(this.loginService.usernameEmail.value).subscribe((res: CartItems[]) => {
+      this.cartService.getAllOrderedProducts().subscribe((res: CartItems[]) => {
         // this.cartService.getAllOrderedProducts().subscribe((res: CartItems[]) => {
         let alreadyInOrdered : boolean = false;
         res.forEach((item: CartItems) => {

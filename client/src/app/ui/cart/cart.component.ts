@@ -1,3 +1,4 @@
+import { ShippingService } from './../../services/shipping.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { OrdersComponent } from "../orders/orders.component";
 import { CartItems } from '../../types/cartInterface.interface';
@@ -9,6 +10,9 @@ import { RouterLink } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { ProductsService } from '../../services/products.service';
 import { ProductsInterface } from '../../types/products.interface';
+import { JwtHeaderService } from '../../services/jwt-interceptor.service';
+import { catchError, throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -23,6 +27,7 @@ export class CartComponent implements OnInit {
   cartForm: FormGroup;
   shippingForm: FormGroup;
   payBtn: boolean = false;
+  errorMsg: string = '';
 
   private formBuilder = inject(FormBuilder);
   constructor(
@@ -31,7 +36,10 @@ export class CartComponent implements OnInit {
     private taxService: TaxService,
     public loginService: LoginService,
     public productService: ProductsService,
+    public jwtHeaderService: JwtHeaderService,
+    public shippingService:ShippingService
   ) {
+    this.jwtHeaderService.token = localStorage.getItem('token');
     this.cartForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       creditCard: ['', [Validators.required, Validators.maxLength(16)]],
@@ -46,6 +54,18 @@ export class CartComponent implements OnInit {
       email: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
+  /**
+   * Initializes the component by fetching the cart items and handling any necessary actions.
+   *
+   * This function performs the following tasks:
+   * 1. Fetches the products from the server using the `productService.getProducts()` method.
+   * 2. Subscribes to the observable returned by the `getProducts()` method.
+   * 3. Pushes each product into the `products` array and assigns it to the component's `products` property.
+   * 4. If an error occurs during the fetching process, logs the error to the console.
+   * 5. Checks if the `throughCart` property of the `cartService` is true.
+   * 6. If `throughCart` is true, calls the `reloadFunc()` method and sets `throughCart` to false.
+   * 7. Finally, calls the `getCartItems()` method to fetch the cart items from the server.
+   */
   ngOnInit(): void {
     // this.productService.getProducts().subscribe({
     //   next: (products) => {
@@ -64,16 +84,123 @@ export class CartComponent implements OnInit {
     //   this.cartService.throughCart = false;
     // }
 
-    // this.cartService.getCartItems();
-    // console.log(this.productService.products());
+    this.getCartItems();
   }
 
   shippingCharges: number = 20;
 
+  /**
+   * Calculates the total price for a single item in the cart.
+   *
+   * @param item - The item for which the total price needs to be calculated.
+   * @returns The total price for the item, rounded to two decimal places.
+   *
+   * @example
+   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
+   * const totalPrice = getTotalPerItemCount(item);
+   * console.log(totalPrice); // Output: 21.00
+   */
+  /**
+   * Calculates the total price for a single item in the cart.
+   *
+   * @param item - The item for which the total price needs to be calculated.
+   * The `item` parameter is an object of type `CartItems` that contains the properties:
+   * - `id` (number): The unique identifier of the item.
+   * - `name` (string): The name of the item.
+   * - `price` (number): The price of the item.
+   * - `quantity` (number): The quantity of the item in the cart.
+   *
+   * @returns The total price for the item, rounded to two decimal places.
+   *
+   * @example
+   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
+   * const totalPrice = getTotalPerItemCount(item);
+   * console.log(totalPrice); // Output: 21.00
+   */
+  /**
+   * Calculates the total price for a single item in the cart.
+   *
+   * @param item - The item for which the total price needs to be calculated.
+   * The `item` parameter is an object of type `CartItems` that contains the properties:
+   * - `id` (number): The unique identifier of the item.
+   * - `name` (string): The name of the item.
+   * - `price` (number): The price of the item.
+   * - `quantity` (number): The quantity of the item in the cart.
+   *
+   * @returns The total price for the item, rounded to two decimal places.
+   *
+   * @example
+   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
+   * const totalPrice = getTotalPerItemCount(item);
+   * console.log(totalPrice); // Output: 21.00
+   */
+  /**
+   * Calculates the total price for a single item in the cart.
+   *
+   * @param item - The item for which the total price needs to be calculated.
+   * The `item` parameter is an object of type `CartItems` that contains the properties:
+   * - `id` (number): The unique identifier of the item.
+   * - `name` (string): The name of the item.
+   * - `price` (number): The price of the item.
+   * - `quantity` (number): The quantity of the item in the cart.
+   *
+   * @returns The total price for the item, rounded to two decimal places.
+   *
+   * @example
+   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
+   * const totalPrice = getTotalPerItemCount(item);
+   * console.log(totalPrice); // Output: 21.00
+   */
+  /**
+   * Calculates the total price for a single item in the cart.
+   *
+   * @param item - The item for which the total price needs to be calculated.
+   * The `item` parameter is an object of type `CartItems` that contains the properties:
+   * - `id` (number): The unique identifier of the item.
+   * - `name` (string): The name of the item.
+   * - `price` (number): The price of the item.
+   * - `quantity` (number): The quantity of the item in the cart.
+   *
+   * @returns The total price for the item, rounded to two decimal places.
+   *
+   * @example
+   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
+   * const totalPrice = getTotalPerItemCount(item);
+   * console.log(totalPrice); // Output: 21.00
+   */
+  /**
+   * Calculates the total price for a single item in the cart.
+   *
+   * @param item - The item for which the total price needs to be calculated.
+   * The `item` parameter is an object of type `CartItems` that contains the properties:
+   * - `id` (number): The unique identifier of the item.
+   * - `name` (string): The name of the item.
+   * - `price` (number): The price of the item.
+   * - `quantity` (number): The quantity of the item in the cart.
+   *
+   * @returns The total price for the item, rounded to two decimal places.
+   *
+   * @example
+   * const item: CartItems = { id: 1, name: 'Product A', price: 10.5, quantity: 2 };
+   * const totalPrice = getTotalPerItemCount(item);
+   * console.log(totalPrice); // Output: 21.00
+   */
   getTotalPerItemCount(item: CartItems) {
     return Math.round(item.price * item.quantity * 100) / 100;
   }
 
+  /**
+   * Calculates the total price of all items in the cart.
+   *
+   * @returns The total price of all items in the cart, rounded to two decimal places.
+   *
+   * @remarks
+   * If the cart is empty, the function returns 0.
+   *
+   * @example
+   * const totalPrice = getTotalPrice();
+   * console.log(totalPrice); // Output: 123.45
+   */
   getTotalPrice(): number {
     if (this.cartService.CartItemsArray().length > 0) {
       return (
@@ -90,15 +217,17 @@ export class CartComponent implements OnInit {
     return 0;
   }
 
-  getTotalPriceInclTax(): number {
-    return Math.round(this.taxService.taxAmount(this.getTotalPrice(), 15));
+  getTaxPrice() {
+    return Math.round(this.taxService.taxAmount(this.getTotalPrice()*100, 15))/100;
   }
+
+
   getTotalWithShippingAndTax() {
     return (
       Math.round(
         (this.getTotalPrice() +
           this.getShippingCharges() +
-          this.getTotalPriceInclTax()) *
+          this.getTaxPrice()) *
           100,
       ) / 100
     );
@@ -176,9 +305,7 @@ export class CartComponent implements OnInit {
     //   return;
     // }
     item.quantity++;
-    this.cartService.updateProduct(item).subscribe((data) => {
-      console.log(data);
-    });
+    this.cartService.updateProduct(item).subscribe((data) => {});
   }
 
   getCartQuantity() {
@@ -246,4 +373,74 @@ export class CartComponent implements OnInit {
     let regex = /^[0-9]{3}$/;
     return regex.test(cvv.trim());
   }
-}}
+
+  payClicked(): boolean {
+    this.payBtn = true;
+    return this.payBtn;
+  }
+  onSubmitTwo(): void {
+    this.cartService.CartItemsArray().forEach((item) => {
+      this.shippingService.addShippingAddress(
+        this.shippingForm.value.street,
+        this.shippingForm.value.suburb,
+        this.shippingForm.value.postalCode,
+        this.shippingForm.value.phoneNumber,
+        this.shippingForm.value.email,
+        item
+      );
+    });
+    console.log(this.shippingForm.value);
+
+  }
+
+  getCartItems() {
+    this.cartService
+      .getAllProducts()
+      .pipe(
+        catchError((error) => {
+          let errorMsg: string;
+          if (error.error instanceof ErrorEvent) {
+            this.errorMsg = `Error: ${error.error.message}`;
+          } else {
+            this.errorMsg = this.getServerErrorMessage(error);
+          }
+          // return of([]);
+          return throwError(() => this.errorMsg);
+        }),
+      )
+      .subscribe((res: CartItems[]) => {
+        let alreadyInProductArray: boolean = false;
+
+        res.forEach((item: CartItems) => {
+          for (let i = 0; i < this.cartService.CartItemsArray().length; i++) {
+            if (item.id === this.cartService.CartItemsArray()[i].id) {
+              alreadyInProductArray = true;
+              break;
+            }
+          }
+          if (!alreadyInProductArray) {
+            this.cartService.CartItemsArray().push(item);
+
+            alreadyInProductArray = false;
+          }
+        });
+      });
+  }
+
+  private getServerErrorMessage(error: HttpErrorResponse): string {
+    switch (error.status) {
+      case 404: {
+        return `Not Found: ${error.message}`;
+      }
+      case 403: {
+        return `Access Denied not logged in`;
+      }
+      case 500: {
+        return `Internal Server Error: ${error.message}`;
+      }
+      default: {
+        return `Unknown Server Error: ${error.message}`;
+      }
+    }
+  }
+}
