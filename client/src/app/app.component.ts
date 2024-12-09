@@ -9,6 +9,7 @@ import { LandingPageComponent } from './ui/landing-page/landing-page.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
+
 export class AppComponent {
   title = 'E-commerce';
 }
