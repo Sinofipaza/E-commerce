@@ -95,6 +95,8 @@ export class ProductDetailsComponent {
         softdelete: softDelete,
         ordered: ordered,
       };
+
+
       this.route.params.subscribe((params) => {
         const productId = Number(params['id']);
       });

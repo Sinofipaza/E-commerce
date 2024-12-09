@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { finalize } from 'rxjs';
+import { routes } from '../../app.routes';
 
 /**
  * RegisterComponent is responsible for handling user registration.
@@ -21,7 +22,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   alreadyRegisterd = true;
 
-  constructor(private fb: FormBuilder, public loginService: LoginService) {
+  constructor(private fb: FormBuilder, public loginService: LoginService,private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       surname: ['', [Validators.required]],
@@ -37,7 +38,6 @@ export class RegisterComponent {
    */
   onSubmit(): void {
     if (this.registerForm.valid) {
-      // this.registerForm.disable();
       console.log('Registration data:', this.registerForm.value);
       this.loginService
         .register(
@@ -50,7 +50,11 @@ export class RegisterComponent {
         .subscribe( {
           next: (data: any) => {
             console.log(data);
-            alert("User registered successfully!")
+            alert("User registered successfully")
+            this.router.navigate(['/login'])
+            .then(() => {
+              window.location.reload()
+            });
           },
           error: (error: any) => {
             alert("User already registered")

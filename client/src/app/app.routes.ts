@@ -10,7 +10,6 @@ import { LoginComponent } from './ui/login/login.component';
 import { RegisterComponent } from './ui/register/register.component';
 import { LandingPageComponent } from './ui/landing-page/landing-page.component';
 
-
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'orders', component: OrdersComponent },
@@ -19,6 +18,7 @@ export const routes: Routes = [
     component: CartComponent,
     children: [{ path: 'orders', component: OrdersComponent }],
   },
+
   {
     path: 'productsDetails',
     component: ProductDetailsComponent,
@@ -49,5 +49,4 @@ export const routes: Routes = [
   },
   { path: '', component: LandingPageComponent },
 ];
-
 

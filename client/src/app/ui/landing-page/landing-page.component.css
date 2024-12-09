@@ -1,15 +1,11 @@
 .app {
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;
     background-image: url('/images/pinkbg.png');
     background-position: center;
     padding: 7rem 0;
 }
 
-a {
-    text-decoration: none;
-    color: inherit; /* Makes the link color inherit from the parent */
-  }
 
 .shopbtn {
     text-transform: uppercase;
@@ -37,10 +33,10 @@ a {
 }
 
 .container {
-    width: 59%;
+    width: 57%;
     padding: 2rem;
-    margin-top: 200px;
-    margin-left: 7rem;
+    margin-top: 100px;
+    margin-left: 4rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-family:'Libre Baskerville', serif;
     text-align: center;
@@ -55,14 +51,14 @@ a {
     .container {
         margin: 0;
         min-width: 100%;
-    }   
+    }
 }
 
 @media (min-width: 360px) and (max-width: 884px) {
     .app {
-        background-image: url('/images/Responsive.png'); 
+        background-image: url('/images/Responsive.png');
     }
     .container {
         margin: 0;
-    }   
+    }
 }

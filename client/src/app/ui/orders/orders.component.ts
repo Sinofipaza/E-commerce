@@ -22,6 +22,7 @@ export class OrdersComponent implements OnInit {
 
   getOrderedItems() {
       this.cartService.getAllOrderedProducts().subscribe((res: CartItems[]) => {
+        console.log("get all order items called")
         // this.cartService.getAllOrderedProducts().subscribe((res: CartItems[]) => {
         let alreadyInOrdered : boolean = false;
         res.forEach((item: CartItems) => {
@@ -44,10 +45,13 @@ export class OrdersComponent implements OnInit {
     return Math.round(item.price * item.quantity * 100) / 100;
   }
 
-  cancelOrderFunct() {
+  cancelOrderFunct(it:CartItems) {
     this.cartService.OrderedItems().forEach((item) => {
-      item.ordered = false;
-      item.softdelete = true;
+      if (it.id === item.id) {
+        item.ordered = false;
+        item.softdelete = true;
+      }
+
       location.reload();
       this.cartService.updateProduct(item).subscribe((data) => {
         console.log(data);

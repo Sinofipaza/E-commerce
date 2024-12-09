@@ -54,10 +54,11 @@ app.post("/ordered", verifyToken, async (req, res) => {
     const token = req.headers["authorization"];
     const decoded = jwtDecode(token);
     const { email } = decoded;
+
     const result = await pool.query(
       `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=true AND quantity>0 AND username=\'${email}\' ORDER BY price ASC`
-      // `SELECT * FROM ${tableName} WHERE softDelete=false AND ordered=true AND quantity>0 ORDER BY price ASC`
     );
+  
     res.json(result.rows);
   } catch (err) {
     console.error(err.message);

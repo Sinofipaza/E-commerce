@@ -9,6 +9,8 @@ import {app} from "./routes/expressApp.js"
 import { jwtDecode } from "jwt-decode";
 
 
+
+
 //login endpoint
 app.post('/login', async (req, res) => {
     const email = req.body.email;
@@ -51,10 +53,12 @@ app.post('/register', async (req, res) => {
   
   const { name, surname, phone_number, email, password } = req.body;
 
-  // const saltRounds = 10; //move this to env file
+  const saltRounds = 10;
   const myPlaintextPassword = password;
+
   const encryptedPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
 
+  
     try {
 //checks duplicate users
       const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
@@ -70,7 +74,7 @@ app.post('/register', async (req, res) => {
         );
 
         const token = jwt.sign(
-          { id: result.rows[0].id, email: result.rows[0].email },
+          { id: result.rows[0].id, email:result.rows[0].id },
           process.env.JWT_SECRET,
           { expiresIn: '1h'}
         );
@@ -143,7 +147,7 @@ app.patch('/update-name/:id', verifyToken, async (req, res) => {
 app.get("/products", async (req, res) => {
   try {
     const results = await pool.query(
-      "SELECT id, name, price, short_description, thumbnail_url FROM products;"
+      "SELECT id, name, price, short_description, thumbnail_url, on_hand FROM products;"
     );
     res.json(results.rows);
   } catch (error) {
