@@ -19,19 +19,19 @@
           <p class="product-description mb-4">{{ product?.long_description }}</p>
           <hr />
           @if(jwtHeaderService.token){
-            <span><button type="button" class="btn btn-dark" (click)="addToCart()"><a routerLink="/cart">Add To Cart</a></button></span> 
+            <span><button type="button" class="btn btn-dark" (click)="addToCart()" routerLink="/cart">Add To Cart</button></span>
           }@else {
-            <span><button type="button" class="btn btn-dark" (click)="alertFunct()"><a>Add To Cart</a></button></span> 
+            <span><button type="button" class="btn btn-dark" (click)="alertFunct()">Add To Cart</button></span>
           }
-          
-          <span><button type="button" class="btn btn-dark" (click)="goBackToProducts()">Go Back To Products</button></span> 
+
+          <span><button type="button" class="btn btn-dark" (click)="goBackToProducts()">Go Back To Products</button></span>
         </div>
       </div>
     </div>
 
-  
+
     <!-- End row -->
   </div>
 </div>
-  
-  
+
+
