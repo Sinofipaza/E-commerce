@@ -14,3 +14,6 @@ INSERT INTO users (name, surname, phone_number, email, password) VALUES
 ('Ofentse', 'Mahlangu', '0123456789', 'ofentse@gmail.com', '000000');
 
 SELECT * FROM users;
+
+DELETE users WHERE
+name = "khetha"

@@ -53,9 +53,8 @@ app.post('/register', async (req, res) => {
   
   const { name, surname, phone_number, email, password } = req.body;
 
-  const saltRounds = 10;
+  // const saltRounds = 10; //move this to env file
   const myPlaintextPassword = password;
-
   const encryptedPassword = bcrypt.hashSync(myPlaintextPassword, saltRounds);
 
   
@@ -74,7 +73,7 @@ app.post('/register', async (req, res) => {
         );
 
         const token = jwt.sign(
-          { id: result.rows[0].id, email:result.rows[0].id },
+          { id: result.rows[0].id, email: result.rows[0].email },
           process.env.JWT_SECRET,
           { expiresIn: '1h'}
         );

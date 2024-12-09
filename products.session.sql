@@ -76,3 +76,6 @@ ADD COLUMN on_hand INT DEFAULT 0;
 
 ALTER TABLE products
 ADD CONSTRAINT check_on_hand_nonnegative CHECK (on_hand >= 0);
+
+UPDATE products
+SET on_hand = FLOOR(RANDOM() * 10 + 1); -- Generates random values from 1 to 10

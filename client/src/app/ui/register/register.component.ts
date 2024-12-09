@@ -37,6 +37,7 @@ export class RegisterComponent {
    */
   onSubmit(): void {
     if (this.registerForm.valid) {
+      this.registerForm.disable();
       console.log('Registration data:', this.registerForm.value);
       this.loginService
         .register(
@@ -49,6 +50,7 @@ export class RegisterComponent {
         .subscribe( {
           next: (data: any) => {
             console.log(data);
+            alert("User registered successfully!")
           },
           error: (error: any) => {
             alert("User already registered")
