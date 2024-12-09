@@ -102,22 +102,16 @@ export class ProductDetailsComponent {
       try {
         this.cartService
           .saveCartProduct(cartItem)
-          .pipe(
-            catchError((error) => {
-              this.noError = false;
-              let errorMsg: string;
-              if (error.error instanceof ErrorEvent) {
-                this.errorMsg = `Error: ${error.error.message}`;
-              } else {
-                this.errorMsg = this.getServerErrorMessage(error);
-              }
-
-              return throwError(() => this.errorMsg);
-            }),
-          )
-          .subscribe((response) => {
-            (response: Response) => console.log('done');
-          });
+          .subscribe({
+            next: (data) => {
+              console.log(data);
+              location.reload();
+            },
+            error: (err) => {
+              console.error('Error adding shipping address:', err);
+            },
+          }
+        );
       } catch (err) {
         console.log('error encountered');
       }

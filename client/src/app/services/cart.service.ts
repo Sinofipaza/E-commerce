@@ -96,7 +96,7 @@ export class CartService {
     });
 
     if (toUpdate) {
-      // console.log(product.quantity);
+      console.log("Product update to be contacted");
       this.jwtHeaderService.token = localStorage.getItem('token');
       const headers = this.jwtHeaderService.createHeaders();
       return this.http.put<CartItems>(
@@ -106,7 +106,7 @@ export class CartService {
       );
     }
 
-    // this.loginService.usernameEmail;
+    console.log("about to send to save endpoint")
     this.jwtHeaderService.token = localStorage.getItem('token');
     const headers = this.jwtHeaderService.createHeaders();
     return this.http.post<CartItems>(this.apiUrl + '/saveCartItem', product, {
@@ -114,7 +114,7 @@ export class CartService {
     });
   }
 
- 
 
-  
+
+
 }
