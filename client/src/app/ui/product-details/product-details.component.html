@@ -18,7 +18,12 @@
           <p class="product-title mt-4 mb-1">{{ product?.short_description }}</p>
           <p class="product-description mb-4">{{ product?.long_description }}</p>
           <hr />
-          <span><button type="button" class="btn btn-dark" (click)="addToCart()">Add To Cart</button></span> 
+          @if(jwtHeaderService.token){
+            <span><button type="button" class="btn btn-dark" (click)="addToCart()"><a routerLink="/cart">Add To Cart</a></button></span> 
+          }@else {
+            <span><button type="button" class="btn btn-dark" (click)="alertFunct()"><a>Add To Cart</a></button></span> 
+          }
+          
           <span><button type="button" class="btn btn-dark" (click)="goBackToProducts()">Go Back To Products</button></span> 
         </div>
       </div>

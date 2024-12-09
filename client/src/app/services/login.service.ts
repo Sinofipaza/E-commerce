@@ -1,13 +1,17 @@
 import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { LoginToken } from '../types/LoginToken.interface';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private loginUrl = 'http://localhost:3000';
-  private registerUrl = 'http://localhost:3000';
+  private loginUrl = environment.SERVER;
+  private registerUrl = environment.SERVER;
+  token: LoginToken = {};
   usernameEmail: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) {
@@ -18,15 +22,13 @@ export class LoginService {
   }
   login(email: string, password: string) {
     this.usernameEmail.next(email);
-    localStorage.setItem('userEmail', email);
     const body = { email, password };
     return this.http.post<any>(`${this.loginUrl}/login`, body);
   }
 
   logout() {
-    localStorage.removeItem('userEmail');
+    localStorage.removeItem('token');
     this.usernameEmail.next('');
-    console.log('User logged out');
   }
 
   register(
@@ -36,7 +38,6 @@ export class LoginService {
     email: string,
     password: string,
   ) {
-    // console.log({ name, surname, phone_number, email, password });
     const body = { name, surname, phone_number, email, password };
     return this.http.post<any>(`${this.registerUrl}/register`, body);
   }

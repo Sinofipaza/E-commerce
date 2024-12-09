@@ -9,6 +9,7 @@ import { RegisterComponent } from './ui/register/register.component';
 import { ProductsPageComponent } from './ui/products-page/products-page.component';
 import { ProductDetailsComponent } from './ui/product-details/product-details.component';
 import { LandingPageComponent } from './ui/landing-page/landing-page.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,7 @@ import { LandingPageComponent } from './ui/landing-page/landing-page.component';
     LoginComponent,
     RegisterComponent,
     LandingPageComponent,
+    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

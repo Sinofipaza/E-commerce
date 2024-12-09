@@ -3,7 +3,12 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
+import { finalize } from 'rxjs';
 
+/**
+ * RegisterComponent is responsible for handling user registration.
+ * It uses Reactive Forms to create a form for user input and communicates with the LoginService to register the user.
+ */
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -14,6 +19,7 @@ import { LoginService } from '../../services/login.service';
 export class RegisterComponent {
 
   registerForm: FormGroup;
+  alreadyRegisterd = true;
 
   constructor(private fb: FormBuilder, public loginService: LoginService) {
     this.registerForm = this.fb.group({
@@ -25,11 +31,30 @@ export class RegisterComponent {
     });
   };
 
+  /**
+   * onSubmit handles the form submission.
+   * It checks if the form is valid and then logs the registration data or alerts the user if the form is invalid.
+   */
   onSubmit(): void {
     if (this.registerForm.valid) {
       console.log('Registration data:', this.registerForm.value);
-      this.loginService.register(this.registerForm.value.name, this.registerForm.value.surname, this.registerForm.value.phone, this.registerForm.value.email, this.registerForm.value.password).subscribe((response) => {})
-      alert('Registration successful!');
+      this.loginService
+        .register(
+          this.registerForm.value.name,
+          this.registerForm.value.surname,
+          this.registerForm.value.phone,
+          this.registerForm.value.email,
+          this.registerForm.value.password,
+        )
+        .subscribe( {
+          next: (data: any) => {
+            console.log(data);
+          },
+          error: (error: any) => {
+            alert("User already registered")
+          }
+
+        });
     } else {
       alert('Form is invalid. Please check your inputs.');
     }

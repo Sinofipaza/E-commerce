@@ -2,7 +2,8 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
+// import { JwtInterceptorService } from './services/jwt-interceptor.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,3 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
   ],
 };
+
+// export const httpInterceptorProviders = [
+//   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },
+// ];

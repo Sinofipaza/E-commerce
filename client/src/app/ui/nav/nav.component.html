@@ -24,7 +24,8 @@
           <a class="icon-link" routerLink="#" aria-label="Favorites">
             <img src="icons/heart-outline.svg" alt="Favorites" />
           </a>
-          @if(loginService.usernameEmail.value != ""){
+          <!-- @if(loginService.usernameEmail.value != ""){ -->
+           @if(jwtHeaderService.token){
           <a class="icon-link me-3" routerLink="/cart" aria-label="Cart">
             <img src="icons/cart-outline.svg" alt="Cart" />
           </a>
@@ -48,18 +49,19 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="accountDropdown"
             >
-               <li *ngIf="loginService.usernameEmail.value === ''">
+               <li *ngIf="!jwtHeaderService.token">
+                <!-- < *ngIf="loginService.usernameEmail.value === ''"> -->
               <a class="dropdown-item" routerLink="login">Login</a>
             </li>
-            <li *ngIf="loginService.usernameEmail.value === ''">
+            <li *ngIf="!jwtHeaderService.token">
               <a class="dropdown-item" routerLink="register">Register</a>
             </li>
 
               <!-- This part will be shown if the user is logged in -->
-              <li *ngIf="loginService.usernameEmail.value !== ''">
+              <li *ngIf="jwtHeaderService.token">
               <a class="dropdown-item" (click)="loginService.logout()" routerLink="">Logout</a>
             </li>
-              @if(loginService.usernameEmail.value != ""){
+              @if(jwtHeaderService.token){
               <li>
                 <a class="dropdown-item" routerLink="/orders">Orders</a>
               </li>

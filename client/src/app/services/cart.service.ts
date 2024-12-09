@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { CartItems } from '../types/cartInterface.interface';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, map, Observable, of, Subscription, throwError } from 'rxjs';
 import { LoginService } from './login.service';
 import { environment } from '../../environments/environment.development';
+import { JwtHeaderService } from './jwt-interceptor.service';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root',
@@ -14,16 +17,42 @@ export class CartService {
   subscriptionList: Subscription[] = [];
   throughCart: boolean = false;
 
-  // apiUrl: string = 'http://localhost:3000/';
-  apiUrl: string = environment.SERVER
+  apiUrl: string = environment.SERVER;
+  errorMsg: string = '';
   constructor(
     private http: HttpClient,
     public loginService: LoginService,
+    private jwtHeaderService: JwtHeaderService,
+    private _router: Router,
   ) {}
 
-  getAllProducts(email: string): Observable<CartItems[]> | undefined {
-    const emailObj = { email: email };
-    return this.http.post<CartItems[]>(this.apiUrl + 'cartItems', emailObj);
+  // constructor() {}
+  // intercept(
+  //   req: HttpRequest<any>,
+  //   next: HttpHandler,
+  // ): Observable<HttpEvent<any>> {
+  //   return next.handle(req).pipe(
+  //     catchError((error) => {
+  //       if (error.status == 401) {
+  //         console.log("error encountered");
+  //       } else {
+
+  //         return Observable.throwError(() => new Error('Your error'));
+  //       }
+  //     }),
+  //   );
+  // }
+
+  getAllProducts(): Observable<CartItems[]> {
+    this.jwtHeaderService.token = localStorage.getItem('token');
+    const headers = this.jwtHeaderService.createHeaders();
+
+    // console.log(headers);
+    return this.http.post<CartItems[]>(
+      this.apiUrl + '/cartItems',
+      {},
+      { headers },
+    );
   }
 
   // getAllProducts(): Observable<CartItems[]> | undefined {
@@ -31,9 +60,13 @@ export class CartService {
   //   return this.http.get<CartItems[]>(this.apiUrl + 'cartItems');
   // }
 
-  getAllOrderedProducts(email: string): Observable<CartItems[]> {
-    const emailObj = { email: email };
-    return this.http.post<CartItems[]>(this.apiUrl + 'ordered', emailObj);
+  getAllOrderedProducts(): Observable<CartItems[]> {
+    const headers = this.jwtHeaderService.createHeaders();
+    return this.http.post<CartItems[]>(
+      this.apiUrl + '/ordered',
+      {},
+      { headers },
+    );
   }
 
   // getAllOrderedProducts(): Observable<CartItems[]> {
@@ -42,7 +75,11 @@ export class CartService {
   // }
 
   updateProduct(product: CartItems) {
-    return this.http.put<CartItems>(this.apiUrl + 'updateCartITem', product);
+    this.jwtHeaderService.token = localStorage.getItem('token');
+    const headers = this.jwtHeaderService.createHeaders();
+    return this.http.put<CartItems>(this.apiUrl + '/updateCartITem', product, {
+      headers,
+    });
   }
 
   saveCartProduct(product: CartItems) {
@@ -59,35 +96,25 @@ export class CartService {
     });
 
     if (toUpdate) {
-      console.log(product.quantity);
-      return this.http.put<CartItems>(this.apiUrl + 'updateCartITem', product);
+      // console.log(product.quantity);
+      this.jwtHeaderService.token = localStorage.getItem('token');
+      const headers = this.jwtHeaderService.createHeaders();
+      return this.http.put<CartItems>(
+        this.apiUrl + '/updateCartITem',
+        product,
+        { headers },
+      );
     }
 
     // this.loginService.usernameEmail;
-    return this.http.post<CartItems>(this.apiUrl + 'saveCartItem', product);
+    this.jwtHeaderService.token = localStorage.getItem('token');
+    const headers = this.jwtHeaderService.createHeaders();
+    return this.http.post<CartItems>(this.apiUrl + '/saveCartItem', product, {
+      headers,
+    });
   }
 
-  getCartItems() {
-    // this.getAllProducts()?.subscribe(
-      this.getAllProducts(this.loginService.usernameEmail.value)?.subscribe(
-      (res: CartItems[]) => {
-        let alreadyInProductArray: boolean = false;
+ 
 
-        res.forEach((item: CartItems) => {
-          for (let i = 0; i < this.CartItemsArray().length; i++) {
-            if (item.id === this.CartItemsArray()[i].id) {
-              alreadyInProductArray = true;
-              break;
-            }
-          }
-
-          if (!alreadyInProductArray) {
-            this.CartItemsArray().push(item);
-
-            alreadyInProductArray = false;
-          }
-        });
-      },
-    );
-  }
+  
 }
